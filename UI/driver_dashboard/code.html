@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container": "#eceef0",
+                    "inverse-surface": "#2d3133",
+                    "on-primary-fixed-variant": "#005236",
+                    "on-background": "#191c1e",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary-container": "#00367a",
+                    "on-secondary-container": "#5c647a",
+                    "secondary-fixed": "#dae2fd",
+                    "surface-container-high": "#e6e8ea",
+                    "on-secondary": "#ffffff",
+                    "tertiary-container": "#71a1ff",
+                    "on-tertiary-fixed-variant": "#004395",
+                    "on-surface-variant": "#3c4a42",
+                    "on-secondary-fixed": "#131b2e",
+                    "error": "#ba1a1a",
+                    "primary-container": "#10b981",
+                    "on-error-container": "#93000a",
+                    "on-error": "#ffffff",
+                    "inverse-on-surface": "#eff1f3",
+                    "background": "#f7f9fb",
+                    "surface-tint": "#006c49",
+                    "surface-dim": "#d8dadc",
+                    "on-tertiary": "#ffffff",
+                    "surface-bright": "#f7f9fb",
+                    "on-tertiary-fixed": "#001a42",
+                    "surface-container-low": "#f2f4f6",
+                    "primary-fixed-dim": "#4edea3",
+                    "surface-variant": "#e0e3e5",
+                    "tertiary-fixed-dim": "#adc6ff",
+                    "outline-variant": "#bbcabf",
+                    "on-primary-container": "#00422b",
+                    "secondary-fixed-dim": "#bec6e0",
+                    "secondary": "#565e74",
+                    "surface-container-highest": "#e0e3e5",
+                    "primary": "#006c49",
+                    "on-primary": "#ffffff",
+                    "inverse-primary": "#4edea3",
+                    "outline": "#6c7a71",
+                    "on-surface": "#191c1e",
+                    "primary-fixed": "#6ffbbe",
+                    "secondary-container": "#dae2fd",
+                    "tertiary": "#005ac2",
+                    "surface": "#f7f9fb",
+                    "tertiary-fixed": "#d8e2ff",
+                    "on-secondary-fixed-variant": "#3f465c",
+                    "on-primary-fixed": "#002113",
+                    "error-container": "#ffdad6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "lg": "24px",
+                    "xl": "48px",
+                    "sm": "8px",
+                    "unit": "4px",
+                    "xs": "4px",
+                    "gutter": "16px",
+                    "md": "16px",
+                    "margin": "24px"
+            },
+            "fontFamily": {
+                    "h3": ["Manrope"],
+                    "h2": ["Manrope"],
+                    "h1": ["Manrope"],
+                    "body-lg": ["Manrope"],
+                    "body-md": ["Manrope"],
+                    "label-sm": ["Manrope"],
+                    "label-md": ["Manrope"]
+            },
+            "fontSize": {
+                    "h3": ["24px", {"lineHeight": "1.3", "fontWeight": "700"}],
+                    "h2": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "h1": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "1.4", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.01em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-background font-body-md text-on-surface">
+<!-- TopAppBar -->
+<header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-slate-100 shadow-sm font-manrope antialiased tracking-tight">
+<div class="flex justify-between items-center w-full px-6 py-3 max-w-7xl mx-auto">
+<div class="text-xl font-extrabold text-emerald-600 tracking-tighter">SahaYatra</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-slate-600 hover:text-emerald-500 transition-colors font-body-md" href="#">Find Rides</a>
+<a class="text-emerald-600 font-semibold border-b-2 border-emerald-600 font-body-md" href="#">Offer Ride</a>
+<a class="text-slate-600 hover:text-emerald-500 transition-colors font-body-md" href="#">How it Works</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-600 hover:bg-slate-50 rounded-lg transition-all">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-slate-600 hover:bg-slate-50 rounded-lg transition-all">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-6 py-lg">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-lg">
+<!-- Left Column: Offer a Ride Form (Asymmetric Layout) -->
+<section class="lg:col-span-5">
+<div class="bg-white rounded-xl border border-outline-variant shadow-sm p-lg sticky top-24">
+<div class="mb-lg">
+<h2 class="font-h2 text-h2 text-on-surface mb-xs">Offer a Ride</h2>
+<p class="font-body-md text-on-surface-variant">Turn your empty seats into shared experiences.</p>
+</div>
+<form class="space-y-md">
+<div class="grid grid-cols-1 gap-md">
+<div class="relative">
+<label class="font-label-md block mb-xs text-on-surface-variant">Source</label>
+<div class="flex items-center border border-outline rounded-lg px-3 py-2 bg-white focus-within:border-primary focus-within:ring-2 ring-primary/10 transition-all">
+<span class="material-symbols-outlined text-primary mr-2" data-icon="my_location">my_location</span>
+<input class="w-full border-none focus:ring-0 p-0 text-body-md bg-transparent" placeholder="Departure city" type="text"/>
+</div>
+</div>
+<div class="relative">
+<label class="font-label-md block mb-xs text-on-surface-variant">Destination</label>
+<div class="flex items-center border border-outline rounded-lg px-3 py-2 bg-white focus-within:border-primary focus-within:ring-2 ring-primary/10 transition-all">
+<span class="material-symbols-outlined text-primary mr-2" data-icon="location_on">location_on</span>
+<input class="w-full border-none focus:ring-0 p-0 text-body-md bg-transparent" placeholder="Arrival city" type="text"/>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-md">
+<div>
+<label class="font-label-md block mb-xs text-on-surface-variant">Date</label>
+<div class="flex items-center border border-outline rounded-lg px-3 py-2 bg-white focus-within:border-primary transition-all">
+<span class="material-symbols-outlined text-slate-400 mr-2" data-icon="calendar_month">calendar_month</span>
+<input class="w-full border-none focus:ring-0 p-0 text-body-md bg-transparent" type="date"/>
+</div>
+</div>
+<div>
+<label class="font-label-md block mb-xs text-on-surface-variant">Time</label>
+<div class="flex items-center border border-outline rounded-lg px-3 py-2 bg-white focus-within:border-primary transition-all">
+<span class="material-symbols-outlined text-slate-400 mr-2" data-icon="schedule">schedule</span>
+<input class="w-full border-none focus:ring-0 p-0 text-body-md bg-transparent" type="time"/>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-md">
+<div>
+<label class="font-label-md block mb-xs text-on-surface-variant">Price per seat</label>
+<div class="flex items-center border border-outline rounded-lg px-3 py-2 bg-white focus-within:border-primary transition-all">
+<span class="text-on-surface-variant font-bold mr-2">NRs</span>
+<input class="w-full border-none focus:ring-0 p-0 text-body-md bg-transparent" placeholder="500" type="number"/>
+</div>
+</div>
+<div>
+<label class="font-label-md block mb-xs text-on-surface-variant">Available Seats</label>
+<div class="flex items-center border border-outline rounded-lg px-3 py-2 bg-white focus-within:border-primary transition-all">
+<span class="material-symbols-outlined text-slate-400 mr-2" data-icon="group">group</span>
+<select class="w-full border-none focus:ring-0 p-0 text-body-md bg-transparent appearance-none">
+<option>1</option>
+<option>2</option>
+<option>3</option>
+<option>4</option>
+</select>
+</div>
+</div>
+</div>
+<button class="w-full bg-primary text-on-primary font-h3 py-3 rounded-full hover:shadow-lg active:scale-95 transition-all mt-sm flex items-center justify-center gap-2" type="submit">
+<span class="material-symbols-outlined" data-icon="directions_car">directions_car</span>
+                            Publish Ride
+                        </button>
+</form>
+</div>
+</section>
+<!-- Right Column: My Rides (Bento Style) -->
+<section class="lg:col-span-7 space-y-lg">
+<!-- Section: My Active Rides -->
+<div>
+<div class="flex items-center justify-between mb-md">
+<h3 class="font-h3 text-h3 text-on-surface">My Active Rides</h3>
+<span class="bg-primary-container text-on-primary-container px-3 py-1 rounded-full font-label-sm uppercase tracking-wider">2 Rides Live</span>
+</div>
+<div class="grid grid-cols-1 gap-md">
+<!-- Ride Card 1 -->
+<div class="bg-white border border-outline-variant rounded-xl p-md hover:shadow-md transition-shadow relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4">
+<span class="bg-tertiary-container text-on-tertiary-container text-[10px] px-2 py-1 rounded-full font-bold">RECURRING</span>
+</div>
+<div class="flex flex-col md:flex-row md:items-center gap-4">
+<div class="flex-1">
+<div class="flex items-center gap-2 text-primary font-bold mb-2">
+<span>Kathmandu</span>
+<span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+<span>Pokhara</span>
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant font-label-md mb-4">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="event">event</span>
+                                            Oct 24, 2024
+                                        </div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="alarm">alarm</span>
+                                            08:30 AM
+                                        </div>
+</div>
+<div class="flex flex-wrap gap-2 mb-4">
+<div class="flex items-center gap-1 bg-surface-container-low px-2 py-1 rounded-lg">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="verified" data-weight="fill" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="font-label-sm">Verified Driver</span>
+</div>
+<div class="flex items-center gap-1 bg-surface-container-low px-2 py-1 rounded-lg">
+<span class="material-symbols-outlined text-on-tertiary-container text-sm" data-icon="ac_unit">ac_unit</span>
+<span class="font-label-sm">AC On</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-center gap-2 min-w-[120px] p-3 bg-surface-container-lowest border border-slate-50 rounded-xl">
+<span class="font-label-sm text-on-surface-variant">Seat Occupancy</span>
+<div class="flex gap-1">
+<span class="material-symbols-outlined text-primary" data-icon="person" data-weight="fill" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="material-symbols-outlined text-primary" data-icon="person" data-weight="fill" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="material-symbols-outlined text-slate-200" data-icon="person">person</span>
+<span class="material-symbols-outlined text-slate-200" data-icon="person">person</span>
+</div>
+<span class="text-primary font-bold text-h3">2 / 4</span>
+</div>
+</div>
+<div class="mt-md pt-md border-t border-slate-100 flex items-center justify-between">
+<div class="flex -space-x-2">
+<img class="w-8 h-8 rounded-full border-2 border-white object-cover" data-alt="close-up portrait of a friendly man with glasses smiling" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQuGTR8oxaY_0hoAPV3OjFCCP96DorJQPd6R78VSBRoMqsTZdfs_Yx-T8COApk4rGUntY6RjArKEkGB75jRQ4W0gUXpxDzc5WdmeEEPg3tp2kkJTO-g76wmrc-0zCFB9pQdnJ2Zk1YMSv4oJU0dcVTIk74zShlhCEx6gRAqeYgPAQCLahGiKKOjKYyxP-RNpatnvRzbr2BxFk8bnsqsZol0Ip0RawN4250TaLynPVN1Dy_5XaTCFVUKUi3KHT1TaFANYwJnPT6WXI"/>
+<img class="w-8 h-8 rounded-full border-2 border-white object-cover" data-alt="portrait of a young woman with curly hair looking happy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQoP0dtIm7fyOuw9NIVjWkj_BU5KfmOdydLxbfu6cJtnPHkZZ15JmYgjOFynYSTUYn7idmSDeoqT6YDvRdB5RUfa4k9GNQarhLLV4OAR7ji_qumSuTNjp7ndmhcIssXaS_n-hGcC0Yo1io-u3VnQBjRkQVNpKlZ9PlKkszm7my3NEtJi7QbAkab-54f_LqZp4NMyI1RyA9nusyMrMSVxQUoMHaDUVOvbuONnHw1Lr5-R2_IuxqJgN5pe9cMa3laRtB_DNP38axDvY"/>
+<div class="w-8 h-8 rounded-full bg-slate-100 border-2 border-white flex items-center justify-center text-[10px] font-bold text-slate-400">+2 more</div>
+</div>
+<div class="flex gap-2">
+<button class="px-4 py-2 text-on-surface-variant font-label-md hover:bg-slate-50 rounded-lg transition-all">Details</button>
+<button class="px-4 py-2 bg-primary-container text-on-primary-container font-label-md rounded-lg hover:opacity-90 transition-all">Manage</button>
+</div>
+</div>
+</div>
+<!-- Ride Card 2 -->
+<div class="bg-white border border-outline-variant rounded-xl p-md hover:shadow-md transition-shadow relative">
+<div class="flex flex-col md:flex-row md:items-center gap-4">
+<div class="flex-1">
+<div class="flex items-center gap-2 text-primary font-bold mb-2">
+<span>Lalitpur</span>
+<span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+<span>Butwal</span>
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant font-label-md mb-4">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="event">event</span>
+                                            Oct 26, 2024
+                                        </div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="alarm">alarm</span>
+                                            06:00 AM
+                                        </div>
+</div>
+</div>
+<div class="flex flex-col items-center gap-2 min-w-[120px] p-3 bg-surface-container-lowest border border-slate-50 rounded-xl">
+<span class="font-label-sm text-on-surface-variant">Seat Occupancy</span>
+<div class="flex gap-1">
+<span class="material-symbols-outlined text-slate-200" data-icon="person">person</span>
+<span class="material-symbols-outlined text-slate-200" data-icon="person">person</span>
+<span class="material-symbols-outlined text-slate-200" data-icon="person">person</span>
+</div>
+<span class="text-slate-400 font-bold text-h3">0 / 3</span>
+</div>
+</div>
+<div class="mt-md pt-md border-t border-slate-100 flex items-center justify-between">
+<span class="text-label-sm text-on-surface-variant italic">No bookings yet</span>
+<div class="flex gap-2">
+<button class="px-4 py-2 text-error font-label-md hover:bg-error-container/20 rounded-lg transition-all">Cancel</button>
+<button class="px-4 py-2 bg-primary-container text-on-primary-container font-label-md rounded-lg hover:opacity-90 transition-all">Manage</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Section: My Completed Rides -->
+<div>
+<h3 class="font-h3 text-h3 text-on-surface mb-md">My Completed Rides</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<!-- Completed Card 1 -->
+<div class="bg-surface-container-low border border-outline-variant rounded-xl p-md flex flex-col justify-between opacity-80">
+<div>
+<div class="flex justify-between items-start mb-2">
+<div class="text-on-surface font-bold text-body-md">KTM → Chitwan</div>
+<span class="material-symbols-outlined text-primary" data-icon="check_circle" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="text-on-surface-variant font-label-sm mb-4">Completed Oct 12</div>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-tertiary text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-bold text-on-surface">4.9</span>
+</div>
+<div class="text-primary font-bold">NRs 1,200</div>
+</div>
+</div>
+<!-- Completed Card 2 -->
+<div class="bg-surface-container-low border border-outline-variant rounded-xl p-md flex flex-col justify-between opacity-80">
+<div>
+<div class="flex justify-between items-start mb-2">
+<div class="text-on-surface font-bold text-body-md">Bhaktapur → KTM</div>
+<span class="material-symbols-outlined text-primary" data-icon="check_circle" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="text-on-surface-variant font-label-sm mb-4">Completed Oct 10</div>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-tertiary text-sm" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-bold text-on-surface">5.0</span>
+</div>
+<div class="text-primary font-bold">NRs 450</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-slate-50 border-t border-slate-200 mt-xl py-12 font-manrope text-sm text-slate-500">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-6 max-w-7xl mx-auto">
+<div>
+<div class="text-lg font-bold text-slate-900 mb-4">SahaYatra</div>
+<p>© 2024 SahaYatra. Confident Commuting.</p>
+</div>
+<div class="flex flex-col gap-2">
+<h4 class="font-bold text-slate-900 mb-2">Platform</h4>
+<a class="hover:underline decoration-emerald-500 underline-offset-4" href="#">Privacy Policy</a>
+<a class="hover:underline decoration-emerald-500 underline-offset-4" href="#">Terms of Service</a>
+</div>
+<div class="flex flex-col gap-2">
+<h4 class="font-bold text-slate-900 mb-2">Support</h4>
+<a class="hover:underline decoration-emerald-500 underline-offset-4" href="#">Help Center</a>
+<a class="hover:underline decoration-emerald-500 underline-offset-4" href="#">Carbon Impact</a>
+</div>
+<div>
+<h4 class="font-bold text-slate-900 mb-2">Verified Profile</h4>
+<div class="flex items-center gap-2 p-3 bg-white rounded-lg border border-slate-100 shadow-sm">
+<span class="material-symbols-outlined text-tertiary" data-icon="shield" data-weight="fill" style="font-variation-settings: 'FILL' 1;">shield</span>
+<span class="text-xs font-semibold text-slate-700 uppercase tracking-tighter">Trust Score: 98%</span>
+</div>
+</div>
+</div>
+</footer>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 flex justify-around items-center px-4 py-3 pb-safe z-50 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
+<a class="flex flex-col items-center justify-center text-slate-500" href="#">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+<span class="text-[11px] font-semibold font-manrope uppercase tracking-wider mt-1">Explore</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500" href="#">
+<span class="material-symbols-outlined" data-icon="directions_car">directions_car</span>
+<span class="text-[11px] font-semibold font-manrope uppercase tracking-wider mt-1">My Rides</span>
+</a>
+<a class="flex flex-col items-center justify-center text-emerald-600 bg-emerald-50 rounded-xl px-3 py-1" href="#">
+<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
+<span class="text-[11px] font-semibold font-manrope uppercase tracking-wider mt-1">Offer</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="text-[11px] font-semibold font-manrope uppercase tracking-wider mt-1">Profile</span>
+</a>
+</nav>
+</body></html>

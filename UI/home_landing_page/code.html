@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SahaYatra - Confident Commuting</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container": "#eceef0",
+                    "inverse-surface": "#2d3133",
+                    "on-primary-fixed-variant": "#005236",
+                    "on-background": "#191c1e",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary-container": "#00367a",
+                    "on-secondary-container": "#5c647a",
+                    "secondary-fixed": "#dae2fd",
+                    "surface-container-high": "#e6e8ea",
+                    "on-secondary": "#ffffff",
+                    "tertiary-container": "#71a1ff",
+                    "on-tertiary-fixed-variant": "#004395",
+                    "on-surface-variant": "#3c4a42",
+                    "on-secondary-fixed": "#131b2e",
+                    "error": "#ba1a1a",
+                    "primary-container": "#10b981",
+                    "on-error-container": "#93000a",
+                    "on-error": "#ffffff",
+                    "inverse-on-surface": "#eff1f3",
+                    "background": "#f7f9fb",
+                    "surface-tint": "#006c49",
+                    "surface-dim": "#d8dadc",
+                    "on-tertiary": "#ffffff",
+                    "surface-bright": "#f7f9fb",
+                    "on-tertiary-fixed": "#001a42",
+                    "surface-container-low": "#f2f4f6",
+                    "primary-fixed-dim": "#4edea3",
+                    "surface-variant": "#e0e3e5",
+                    "tertiary-fixed-dim": "#adc6ff",
+                    "outline-variant": "#bbcabf",
+                    "on-primary-container": "#00422b",
+                    "secondary-fixed-dim": "#bec6e0",
+                    "secondary": "#565e74",
+                    "surface-container-highest": "#e0e3e5",
+                    "primary": "#006c49",
+                    "on-primary": "#ffffff",
+                    "inverse-primary": "#4edea3",
+                    "outline": "#6c7a71",
+                    "on-surface": "#191c1e",
+                    "primary-fixed": "#6ffbbe",
+                    "secondary-container": "#dae2fd",
+                    "tertiary": "#005ac2",
+                    "surface": "#f7f9fb",
+                    "tertiary-fixed": "#d8e2ff",
+                    "on-secondary-fixed-variant": "#3f465c",
+                    "on-primary-fixed": "#002113",
+                    "error-container": "#ffdad6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "lg": "24px",
+                    "xl": "48px",
+                    "sm": "8px",
+                    "unit": "4px",
+                    "xs": "4px",
+                    "gutter": "16px",
+                    "md": "16px",
+                    "margin": "24px"
+            },
+            "fontFamily": {
+                    "h3": ["Manrope"],
+                    "h2": ["Manrope"],
+                    "h1": ["Manrope"],
+                    "body-lg": ["Manrope"],
+                    "body-md": ["Manrope"],
+                    "label-sm": ["Manrope"],
+                    "label-md": ["Manrope"]
+            },
+            "fontSize": {
+                    "h3": ["24px", {"lineHeight": "1.3", "fontWeight": "700"}],
+                    "h2": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "h1": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "1.4", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.01em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .backdrop-blur-md {
+            backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="bg-background font-body-md text-on-background">
+<!-- TopAppBar -->
+<header class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md font-manrope antialiased tracking-tight docked full-width top-0 sticky z-50 border-b border-slate-100 dark:border-slate-800 shadow-sm">
+<nav class="flex justify-between items-center w-full px-6 py-3 max-w-7xl mx-auto">
+<div class="text-xl font-extrabold text-emerald-600 dark:text-emerald-400 tracking-tighter">SahaYatra</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-emerald-600 dark:text-emerald-400 font-semibold border-b-2 border-emerald-600 px-1 py-1" href="#">Find Rides</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-emerald-500 transition-colors" href="#">Offer Ride</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-emerald-500 transition-colors" href="#">How it Works</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-600 hover:bg-slate-50 dark:hover:bg-slate-800/50 rounded-lg transition-all">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-slate-600 hover:bg-slate-50 dark:hover:bg-slate-800/50 rounded-lg transition-all">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</nav>
+</header>
+<main>
+<!-- Hero Section -->
+<section class="relative min-h-[819px] flex items-center pt-xl pb-xl px-margin">
+<div class="absolute inset-0 z-0">
+<div class="w-full h-full bg-[url('https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&amp;fit=crop&amp;q=80')] bg-cover bg-center" data-alt="clean urban cityscape with a clear blue sky and modern architecture, soft natural light, minimalist aesthetic"></div>
+<div class="absolute inset-0 bg-gradient-to-r from-background via-background/90 to-transparent"></div>
+</div>
+<div class="relative z-10 max-w-7xl mx-auto w-full">
+<div class="max-w-2xl">
+<h1 class="font-h1 text-h1 text-on-background mb-md">Confident Commuting for the Modern Community.</h1>
+<p class="font-body-lg text-body-lg text-secondary mb-xl">Bridge the gap between environmental consciousness and unwavering reliability. Join SahaYatra's trusted network of carpoolers.</p>
+<!-- Search Widget -->
+<div class="bg-surface-container-lowest p-md rounded-xl shadow-xl border border-outline-variant flex flex-col md:flex-row gap-4">
+<div class="flex-1 flex items-center gap-3 px-4 py-3 bg-surface-container-low rounded-lg border border-transparent focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/10 transition-all">
+<span class="material-symbols-outlined text-primary">location_on</span>
+<input class="bg-transparent border-none focus:ring-0 w-full font-body-md p-0" placeholder="Leaving from..." type="text"/>
+</div>
+<div class="flex-1 flex items-center gap-3 px-4 py-3 bg-surface-container-low rounded-lg border border-transparent focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/10 transition-all">
+<span class="material-symbols-outlined text-primary">near_me</span>
+<input class="bg-transparent border-none focus:ring-0 w-full font-body-md p-0" placeholder="Going to..." type="text"/>
+</div>
+<div class="flex-1 flex items-center gap-3 px-4 py-3 bg-surface-container-low rounded-lg border border-transparent focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/10 transition-all">
+<span class="material-symbols-outlined text-primary">calendar_today</span>
+<input class="bg-transparent border-none focus:ring-0 w-full font-body-md p-0" type="date"/>
+</div>
+<button class="bg-primary text-on-primary px-xl py-3 rounded-full font-label-md hover:bg-primary-fixed-dim transition-all active:scale-95">
+                            Search
+                        </button>
+</div>
+<div class="mt-lg flex flex-wrap gap-4">
+<button class="flex items-center gap-2 bg-primary-container text-on-primary-container px-lg py-2 rounded-full font-label-md hover:opacity-90 transition-all">
+<span class="material-symbols-outlined text-sm">directions_car</span>
+                            Offer a Ride
+                        </button>
+<button class="flex items-center gap-2 border border-outline text-secondary px-lg py-2 rounded-full font-label-md hover:bg-surface-container-low transition-all">
+<span class="material-symbols-outlined text-sm">info</span>
+                            How it Works
+                        </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Bento Grid Features Section -->
+<section class="py-xl px-margin max-w-7xl mx-auto">
+<div class="mb-xl text-center">
+<h2 class="font-h2 text-h2 text-on-background mb-sm">Why choose SahaYatra?</h2>
+<p class="font-body-md text-secondary">The helpful, high-tech concierge for your daily journey.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Large Feature: Trust -->
+<div class="md:col-span-2 bg-white rounded-xl p-xl border border-slate-100 shadow-sm flex flex-col md:flex-row gap-lg items-center">
+<div class="flex-1">
+<div class="flex items-center gap-2 text-tertiary mb-sm">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<span class="font-label-md uppercase tracking-wider">Verified Profiles</span>
+</div>
+<h3 class="font-h3 text-h3 text-on-background mb-md">Community Trust is our Currency.</h3>
+<p class="font-body-md text-secondary mb-lg">Every SahaYatra member undergoes a multi-step verification process, including ID checks and peer reviews, ensuring your safety is never a compromise.</p>
+<div class="flex flex-wrap gap-2">
+<span class="bg-emerald-50 text-primary px-3 py-1 rounded-full text-xs font-semibold">Government ID</span>
+<span class="bg-emerald-50 text-primary px-3 py-1 rounded-full text-xs font-semibold">Phone Verified</span>
+<span class="bg-emerald-50 text-primary px-3 py-1 rounded-full text-xs font-semibold">4.8+ Avg Rating</span>
+</div>
+</div>
+<div class="w-full md:w-1/3 aspect-square rounded-xl overflow-hidden shadow-inner">
+<img class="w-full h-full object-cover" data-alt="diverse group of happy young professionals standing together in a bright modern office atrium, smiling and talking" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5kchSyYnPEcnNJUZmlp94OCpShTE6qJ4TYD7uCM5ipdTaqhHmhFLPvfAWteB3ZHZwZmL-bViQSIlwl77Ux7cMvQI9iBHxP9t9rH912UKobmpYGamfvcwsrykVlgr35xQyGmNyKbagl37yW0s2jFdGnDLrFLtMTRnDlAKAhCC5TUzhv21ZUT2cAYSY7idd_nq6Dq_ET-0t-I7OSbFNAyrqowtYhjlly4WBTL70koNP_qk43CQuLHARHSTHkzMHVLziEzXaHgXBvck"/>
+</div>
+</div>
+<!-- Carbon Impact Card -->
+<div class="bg-slate-900 text-white rounded-xl p-xl flex flex-col justify-between relative overflow-hidden">
+<div class="relative z-10">
+<span class="material-symbols-outlined text-primary-fixed text-4xl mb-md">eco</span>
+<h3 class="font-h3 text-h3 mb-md text-white">12.4 Tons</h3>
+<p class="font-body-md text-slate-400">Carbon emissions saved by our community this month alone.</p>
+</div>
+<div class="mt-lg relative z-10">
+<button class="text-primary-fixed font-label-md flex items-center gap-2 hover:underline">
+                            Track your impact <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+<!-- Decorative background element -->
+<div class="absolute -bottom-12 -right-12 w-48 h-48 bg-primary/20 rounded-full blur-3xl"></div>
+</div>
+<!-- Reliability Card -->
+<div class="bg-white rounded-xl p-lg border border-slate-100 shadow-sm">
+<div class="w-12 h-12 bg-secondary-container rounded-xl flex items-center justify-center mb-md">
+<span class="material-symbols-outlined text-tertiary">schedule</span>
+</div>
+<h3 class="font-label-md text-on-surface mb-sm">Always on Time</h3>
+<p class="font-body-md text-secondary">Our smart routing and real-time tracking ensure you reach your destination without the stress of delays.</p>
+</div>
+<!-- Cost Card -->
+<div class="bg-white rounded-xl p-lg border border-slate-100 shadow-sm">
+<div class="w-12 h-12 bg-primary-container/20 rounded-xl flex items-center justify-center mb-md">
+<span class="material-symbols-outlined text-primary">payments</span>
+</div>
+<h3 class="font-label-md text-on-surface mb-sm">Split the Costs</h3>
+<p class="font-body-md text-secondary">Reduce your monthly commuting expenses by up to 60% by sharing fuel and parking costs with peers.</p>
+</div>
+<!-- Concierge Card -->
+<div class="bg-white rounded-xl p-lg border border-slate-100 shadow-sm">
+<div class="w-12 h-12 bg-surface-container rounded-xl flex items-center justify-center mb-md">
+<span class="material-symbols-outlined text-on-surface-variant">support_agent</span>
+</div>
+<h3 class="font-label-md text-on-surface mb-sm">24/7 Concierge</h3>
+<p class="font-body-md text-secondary">Professional support always available to help with bookings, verification, or trip adjustments.</p>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="py-xl px-margin bg-emerald-50 dark:bg-slate-900/40">
+<div class="max-w-4xl mx-auto text-center">
+<h2 class="font-h1 text-h1 text-primary mb-md">Ready for a better commute?</h2>
+<p class="font-body-lg text-secondary mb-xl">Join thousands of commuters making the switch to a smarter, greener, and more connected way of traveling.</p>
+<div class="flex flex-col sm:flex-row justify-center gap-md">
+<button class="bg-primary text-on-primary px-xl py-4 rounded-full font-label-md text-lg shadow-lg hover:shadow-xl transition-all">Download the App</button>
+<button class="bg-white text-secondary border border-outline px-xl py-4 rounded-full font-label-md text-lg hover:bg-surface-container-low transition-all">Partner with Us</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-slate-50 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 w-full py-12">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-6 max-w-7xl mx-auto">
+<div>
+<div class="text-lg font-bold text-slate-900 dark:text-white mb-md">SahaYatra</div>
+<p class="font-manrope text-sm text-slate-500 dark:text-slate-400">Transforming the daily commute into a shared experience of community and sustainability.</p>
+</div>
+<div>
+<h4 class="font-label-md text-slate-900 dark:text-white mb-md">Product</h4>
+<ul class="space-y-sm font-manrope text-sm text-slate-500 dark:text-slate-400">
+<li><a class="hover:text-emerald-500 hover:underline decoration-emerald-500 underline-offset-4 transition-all duration-300" href="#">Find Rides</a></li>
+<li><a class="hover:text-emerald-500 hover:underline decoration-emerald-500 underline-offset-4 transition-all duration-300" href="#">Offer Ride</a></li>
+<li><a class="hover:text-emerald-500 hover:underline decoration-emerald-500 underline-offset-4 transition-all duration-300" href="#">How it Works</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-md text-slate-900 dark:text-white mb-md">Support</h4>
+<ul class="space-y-sm font-manrope text-sm text-slate-500 dark:text-slate-400">
+<li><a class="hover:text-emerald-500 hover:underline decoration-emerald-500 underline-offset-4 transition-all duration-300" href="#">Privacy Policy</a></li>
+<li><a class="hover:text-emerald-500 hover:underline decoration-emerald-500 underline-offset-4 transition-all duration-300" href="#">Terms of Service</a></li>
+<li><a class="hover:text-emerald-500 hover:underline decoration-emerald-500 underline-offset-4 transition-all duration-300" href="#">Help Center</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-md text-slate-900 dark:text-white mb-md">Impact</h4>
+<ul class="space-y-sm font-manrope text-sm text-slate-500 dark:text-slate-400">
+<li><a class="hover:text-emerald-500 hover:underline decoration-emerald-500 underline-offset-4 transition-all duration-300" href="#">Carbon Impact</a></li>
+<li><a class="hover:text-emerald-500 hover:underline decoration-emerald-500 underline-offset-4 transition-all duration-300" href="#">Community Safety</a></li>
+</ul>
+</div>
+</div>
+<div class="mt-xl pt-lg border-t border-slate-200 dark:border-slate-800 text-center font-manrope text-sm text-slate-500 dark:text-slate-400">
+            © 2024 SahaYatra. Confident Commuting.
+        </div>
+</footer>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 flex justify-around items-center px-4 py-3 pb-safe bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] z-50">
+<button class="flex flex-col items-center justify-center text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/20 rounded-xl px-3 py-1 Active: scale-90 duration-150 ease-out">
+<span class="material-symbols-outlined">search</span>
+<span class="text-[11px] font-semibold font-manrope uppercase tracking-wider">Explore</span>
+</button>
+<button class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 hover:text-emerald-500 transition-colors">
+<span class="material-symbols-outlined">directions_car</span>
+<span class="text-[11px] font-semibold font-manrope uppercase tracking-wider">My Rides</span>
+</button>
+<button class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 hover:text-emerald-500 transition-colors">
+<span class="material-symbols-outlined">add_circle</span>
+<span class="text-[11px] font-semibold font-manrope uppercase tracking-wider">Offer</span>
+</button>
+<button class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 hover:text-emerald-500 transition-colors">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[11px] font-semibold font-manrope uppercase tracking-wider">Profile</span>
+</button>
+</nav>
+<!-- FAB (Contextual) -->
+<button class="fixed right-lg bottom-xl md:bottom-lg bg-primary text-on-primary w-14 h-14 rounded-full shadow-2xl flex items-center justify-center md:hidden z-40">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add</span>
+</button>
+</body></html>
