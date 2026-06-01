@@ -12,12 +12,14 @@ const reviewRoutes = require('./routes/reviewRoutes');
 dotenv.config();
 const app = express();
 
-// Allowed origins: localhost for dev, FRONTEND_URL env var for production
+// Allowed origins: localhost for dev, Vercel for production
 const allowedOrigins = [
     'http://localhost:5173',
     'http://localhost:3000',
-    process.env.FRONTEND_URL, // Set this to your Vercel URL in Render's env vars
-].filter(Boolean); // Remove undefined values
+    'https://sahayatra.vercel.app',
+    'http://sahayatra.vercel.app',
+    process.env.FRONTEND_URL, // Extra override if needed
+].filter(Boolean);
 
 // Middleware
 app.use(express.json());
