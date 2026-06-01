@@ -26,6 +26,14 @@ const UserSchema = new mongoose.Schema({
         type: String,
         enum: ['passenger', 'driver'],
         default: 'passenger'
+    },
+    averageRating: {
+        type: Number,
+        default: 0
+    },
+    totalReviews: {
+        type: Number,
+        default: 0
     }
 }, { timestamps: true });
 

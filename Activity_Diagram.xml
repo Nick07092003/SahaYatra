@@ -1,0 +1,186 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="SahaYatra Activity Diagram">
+    <mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="1654" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- LANE BACKGROUNDS -->
+        <mxCell id="lane_p" value="Passenger" style="swimlane;startSize=40;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=15;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="30" width="520" height="1460" as="geometry" />
+        </mxCell>
+        <mxCell id="lane_d" value="Driver" style="swimlane;startSize=40;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=15;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="600" y="30" width="520" height="1460" as="geometry" />
+        </mxCell>
+
+        <!-- ====== PASSENGER NODES ====== -->
+        <mxCell id="sp" value="" style="ellipse;fillColor=#000000;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="285" y="100" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="p1" value="Register / Login" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="210" y="160" width="180" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p2" value="Search for Rides" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="210" y="250" width="180" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p3" value="View Ride Results" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="210" y="340" width="180" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p4" value="Select a Ride" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="210" y="430" width="180" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p5" value="Send Booking Request" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="210" y="520" width="180" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p6" value="Await Driver Response" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="210" y="610" width="180" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="pd1" value="Request Accepted?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="240" y="700" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="p_rej" value="Booking Rejected&#xa;(Notified)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="60" y="725" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p7" value="Make Payment" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="210" y="830" width="180" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="pd2" value="Payment Successful?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="240" y="920" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="p_retry" value="Retry / Change Payment" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="55" y="945" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p8" value="Receive Booking Confirmation" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="210" y="1050" width="180" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p9" value="Join Ride at Pickup Point" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="210" y="1140" width="180" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p10" value="Reach Destination" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="210" y="1230" width="180" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="p11" value="Write Review for Driver" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="210" y="1320" width="180" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ep" value="" style="ellipse;fillColor=#000000;strokeColor=#000000;strokeWidth=4;" vertex="1" parent="1">
+          <mxGeometry x="283" y="1400" width="34" height="34" as="geometry" />
+        </mxCell>
+
+        <!-- ====== DRIVER NODES ====== -->
+        <mxCell id="sd" value="" style="ellipse;fillColor=#000000;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="825" y="100" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="d1" value="Register / Login" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="750" y="160" width="180" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="d2" value="Create Ride Posting" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="750" y="250" width="180" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="d3" value="Set Route, Date, Time,&#xa;Price &amp; Seats" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="750" y="340" width="180" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="d4" value="Wait for Booking Requests" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="750" y="520" width="180" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="d5" value="Review Booking Request" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="750" y="610" width="180" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="dd1" value="Accept Request?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="780" y="700" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="d_rej" value="Reject &amp; Notify Passenger" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="940" y="725" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="d6" value="Accept &amp; Notify Passenger" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="750" y="830" width="180" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="d7" value="Await Payment Confirmation" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="750" y="920" width="180" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="d8" value="Payment Received&#xa;- Start Ride" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="750" y="1050" width="180" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="d9" value="Drive to Destination" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="750" y="1140" width="180" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="d10" value="Complete Ride&#xa;/ Receive Earnings" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="750" y="1230" width="180" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="d11" value="Write Review for Passenger" style="rounded=1;whiteSpace=wrap;html=1;arcSize=50;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="750" y="1320" width="180" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ed" value="" style="ellipse;fillColor=#000000;strokeColor=#000000;strokeWidth=4;" vertex="1" parent="1">
+          <mxGeometry x="823" y="1400" width="34" height="34" as="geometry" />
+        </mxCell>
+
+        <!-- ====== PASSENGER ARROWS ====== -->
+        <mxCell id="ep1" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="sp" target="p1" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ep2" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="p1" target="p2" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ep3" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="p2" target="p3" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ep4" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="p3" target="p4" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ep5" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="p4" target="p5" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ep6" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="p5" target="p6" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ep7" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="p6" target="pd1" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ep8" value="No" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="pd1" target="p_rej" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ep9" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="p_rej" target="p2" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="100" y="275" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ep10" value="Yes" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="pd1" target="p7" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ep11" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="p7" target="pd2" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ep12" value="No" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="pd2" target="p_retry" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ep13" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="p_retry" target="p7" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="90" y="855" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ep14" value="Yes" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="pd2" target="p8" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ep15" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="p8" target="p9" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ep16" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="p9" target="p10" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ep17" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="p10" target="p11" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ep18" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="p11" target="ep" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <!-- ====== DRIVER ARROWS ====== -->
+        <mxCell id="ed1" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="sd" target="d1" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ed2" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="d1" target="d2" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ed3" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="d2" target="d3" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ed4" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="d3" target="d4" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ed5" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="d4" target="d5" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ed6" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="d5" target="dd1" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ed7" value="No" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="dd1" target="d_rej" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ed8" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="d_rej" target="d4" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1020" y="545" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ed9" value="Yes" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="dd1" target="d6" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ed10" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="d6" target="d7" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ed11" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="d7" target="d8" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ed12" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="d8" target="d9" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ed13" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="d9" target="d10" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ed14" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="d10" target="d11" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="ed15" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="d11" target="ed" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <!-- ====== CROSS-LANE ARROWS ====== -->
+        <!-- Passenger sends request → Driver receives -->
+        <mxCell id="cl1" value="sends request" style="edgeStyle=orthogonalEdgeStyle;dashed=1;strokeColor=#6c8ebf;fontStyle=2;" edge="1" source="p5" target="d4" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <!-- Driver Accept → Passenger: Yes -->
+        <mxCell id="cl2" value="accepted" style="edgeStyle=orthogonalEdgeStyle;dashed=1;strokeColor=#82b366;fontStyle=2;" edge="1" source="d6" target="pd1" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <!-- Driver Reject → Passenger: Rejected -->
+        <mxCell id="cl3" value="rejected" style="edgeStyle=orthogonalEdgeStyle;dashed=1;strokeColor=#b85450;fontStyle=2;" edge="1" source="d_rej" target="p_rej" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <!-- Passenger pays → Driver awaits payment -->
+        <mxCell id="cl4" value="payment sent" style="edgeStyle=orthogonalEdgeStyle;dashed=1;strokeColor=#6c8ebf;fontStyle=2;" edge="1" source="p7" target="d7" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <!-- Driver confirms payment → Passenger decision -->
+        <mxCell id="cl5" value="confirmed" style="edgeStyle=orthogonalEdgeStyle;dashed=1;strokeColor=#82b366;fontStyle=2;" edge="1" source="d8" target="pd2" parent="1"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

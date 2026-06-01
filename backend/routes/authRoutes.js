@@ -159,5 +159,27 @@ router.put('/update/:id', upload.single('profilePicture'), async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 });
+// @route   PUT /api/auth/switch-role/:id
+// @desc    Toggle user role between passenger and driver
+router.put('/switch-role/:id', async (req, res) => {
+    try {
+        const user = await User.findById(req.params.id);
+        if (!user) return res.status(404).json({ message: "User not found" });
+
+        user.role = user.role === 'passenger' ? 'driver' : 'passenger';
+        await user.save();
+
+        res.json({
+            _id: user.id,
+            name: user.name,
+            email: user.email,
+            role: user.role,
+            profilePicture: user.profilePicture,
+            token: generateToken(user._id, user.role, user.name)
+        });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
 
 module.exports = router;

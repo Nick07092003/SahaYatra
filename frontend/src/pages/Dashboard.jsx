@@ -106,12 +106,10 @@ const Dashboard = () => {
               <div className="flex items-center justify-center md:justify-start gap-2">
                 <div className="flex text-yellow-500">
                   <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
-                  <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
-                  <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
-                  <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
-                  <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>star_half</span>
                 </div>
-                <span className="font-label-md text-slate-500">(4.8 • Verified)</span>
+                <span className="font-label-md text-slate-500">
+                  {user.averageRating > 0 ? `${user.averageRating} • ${user.totalReviews} Reviews` : 'New User'} • Verified
+                </span>
               </div>
               <div className="flex flex-wrap justify-center md:justify-start gap-3 pt-3">
                 <span className="bg-emerald-100 text-emerald-800 px-4 py-1.5 rounded-full font-bold text-xs uppercase tracking-wider flex items-center gap-1 border border-emerald-200">
@@ -157,37 +155,45 @@ const Dashboard = () => {
               <h2 className="font-h3 text-2xl mb-8 text-slate-800 border-b border-slate-100 pb-4">Dashboard Actions</h2>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <Link to="/search-rides" className="group p-6 bg-emerald-50 rounded-2xl border border-emerald-100 hover:shadow-md hover:border-emerald-300 transition-all flex flex-col items-center text-center">
-                  <div className="w-16 h-16 bg-emerald-200 text-emerald-700 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                    <span className="material-symbols-outlined text-3xl">search</span>
-                  </div>
-                  <h3 className="font-h3 text-lg text-emerald-900 mb-2">Find a Ride</h3>
-                  <p className="text-emerald-700/80 text-sm">Search for available rides to your destination.</p>
-                </Link>
-                
-                <Link to="/my-bookings" className="group p-6 bg-purple-50 rounded-2xl border border-purple-100 hover:shadow-md hover:border-purple-300 transition-all flex flex-col items-center text-center">
-                  <div className="w-16 h-16 bg-purple-200 text-purple-700 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                    <span className="material-symbols-outlined text-3xl">book_online</span>
-                  </div>
-                  <h3 className="font-h3 text-lg text-purple-900 mb-2">My Bookings</h3>
-                  <p className="text-purple-700/80 text-sm">View your upcoming and past bookings.</p>
-                </Link>
+                {user.role === 'passenger' && (
+                  <>
+                    <Link to="/search-rides" className="group p-6 bg-emerald-50 rounded-2xl border border-emerald-100 hover:shadow-md hover:border-emerald-300 transition-all flex flex-col items-center text-center">
+                      <div className="w-16 h-16 bg-emerald-200 text-emerald-700 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <span className="material-symbols-outlined text-3xl">search</span>
+                      </div>
+                      <h3 className="font-h3 text-lg text-emerald-900 mb-2">Find a Ride</h3>
+                      <p className="text-emerald-700/80 text-sm">Search for available rides to your destination.</p>
+                    </Link>
+                    
+                    <Link to="/my-bookings" className="group p-6 bg-purple-50 rounded-2xl border border-purple-100 hover:shadow-md hover:border-purple-300 transition-all flex flex-col items-center text-center">
+                      <div className="w-16 h-16 bg-purple-200 text-purple-700 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <span className="material-symbols-outlined text-3xl">book_online</span>
+                      </div>
+                      <h3 className="font-h3 text-lg text-purple-900 mb-2">My Bookings</h3>
+                      <p className="text-purple-700/80 text-sm">View your upcoming and past bookings.</p>
+                    </Link>
+                  </>
+                )}
 
-                <Link to="/post-ride" className="group p-6 bg-orange-50 rounded-2xl border border-orange-100 hover:shadow-md hover:border-orange-300 transition-all flex flex-col items-center text-center">
-                  <div className="w-16 h-16 bg-orange-200 text-orange-700 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                    <span className="material-symbols-outlined text-3xl">add_circle</span>
-                  </div>
-                  <h3 className="font-h3 text-lg text-orange-900 mb-2">Offer a Ride</h3>
-                  <p className="text-orange-700/80 text-sm">Create a new ride and share your journey.</p>
-                </Link>
-                
-                <Link to="/manage-rides" className="group p-6 bg-blue-50 rounded-2xl border border-blue-100 hover:shadow-md hover:border-blue-300 transition-all flex flex-col items-center text-center">
-                  <div className="w-16 h-16 bg-blue-200 text-blue-700 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                    <span className="material-symbols-outlined text-3xl">directions_car</span>
-                  </div>
-                  <h3 className="font-h3 text-lg text-blue-900 mb-2">Manage My Rides</h3>
-                  <p className="text-blue-700/80 text-sm">View and manage the rides you have offered.</p>
-                </Link>
+                {user.role === 'driver' && (
+                  <>
+                    <Link to="/post-ride" className="group p-6 bg-orange-50 rounded-2xl border border-orange-100 hover:shadow-md hover:border-orange-300 transition-all flex flex-col items-center text-center">
+                      <div className="w-16 h-16 bg-orange-200 text-orange-700 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <span className="material-symbols-outlined text-3xl">add_circle</span>
+                      </div>
+                      <h3 className="font-h3 text-lg text-orange-900 mb-2">Offer a Ride</h3>
+                      <p className="text-orange-700/80 text-sm">Create a new ride and share your journey.</p>
+                    </Link>
+                    
+                    <Link to="/manage-rides" className="group p-6 bg-blue-50 rounded-2xl border border-blue-100 hover:shadow-md hover:border-blue-300 transition-all flex flex-col items-center text-center">
+                      <div className="w-16 h-16 bg-blue-200 text-blue-700 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <span className="material-symbols-outlined text-3xl">directions_car</span>
+                      </div>
+                      <h3 className="font-h3 text-lg text-blue-900 mb-2">Manage My Rides</h3>
+                      <p className="text-blue-700/80 text-sm">View and manage the rides you have offered.</p>
+                    </Link>
+                  </>
+                )}
               </div>
             </div>
           </div>

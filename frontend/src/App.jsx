@@ -7,6 +7,7 @@ import PostRide from './pages/PostRide';
 import SearchRides from './pages/SearchRides';
 import ManageRides from './pages/ManageRides';
 import MyBookings from './pages/MyBookings';
+import RideHistory from './pages/RideHistory';
 import Support from './pages/Support';
 
 
@@ -25,6 +26,7 @@ function App() {
       <Route path="/search-rides" element={<SearchRides />} />
       <Route path="/manage-rides" element={<ManageRides />} />
       <Route path="/my-bookings" element={<MyBookings />} />
+      <Route path="/history" element={<RideHistory />} />
       <Route path="/support" element={<Support />} />
       
     </Routes>
