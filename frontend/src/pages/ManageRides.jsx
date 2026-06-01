@@ -149,11 +149,11 @@ const ManageRides = () => {
     <div className="bg-background font-body-md text-on-surface min-h-screen flex flex-col">
       <Navbar />
       
-      <main className="flex-grow max-w-7xl mx-auto px-6 py-12 w-full">
+      <main className="flex-grow max-w-7xl mx-auto px-4 md:px-6 py-8 md:py-12 w-full">
         <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
           <div>
-            <h1 className="font-h1 text-h2 text-slate-800">My Rides</h1>
-            <p className="font-body-md text-slate-500 mt-1">Manage the rides you have offered.</p>
+            <h1 className="font-h1 text-2xl md:text-h2 text-slate-800">My Rides</h1>
+            <p className="font-body-md text-slate-500 mt-1 text-sm md:text-base">Manage the rides you have offered.</p>
           </div>
           <div className="bg-emerald-100 text-emerald-800 px-4 py-2 rounded-full font-bold text-sm uppercase tracking-wider flex items-center gap-2 w-fit">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
@@ -176,7 +176,7 @@ const ManageRides = () => {
             </Link>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
             {rides.map((ride) => {
               const active = isRideActive(ride.date, ride.time);
 

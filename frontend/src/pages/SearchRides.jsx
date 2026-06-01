@@ -15,6 +15,7 @@ const SearchRides = () => {
   const [hasSearched, setHasSearched] = useState(false);
   const [loading, setLoading] = useState(false);
   const [mapCenter, setMapCenter] = useState(defaultCenter);
+  const [searchPanelOpen, setSearchPanelOpen] = useState(false);
   const navigate = useNavigate();
 
   // Google Maps Refs
@@ -97,16 +98,27 @@ const SearchRides = () => {
     <div className="bg-background font-body-md text-on-background min-h-screen flex flex-col">
       <Navbar />
       
-      <main className="flex-grow max-w-[1600px] mx-auto px-6 py-8 flex flex-col md:flex-row gap-8 w-full">
+      <main className="flex-grow max-w-[1600px] mx-auto px-4 md:px-6 py-6 flex flex-col md:flex-row gap-6 w-full">
+        {/* Mobile: Search toggle button */}
+        <div className="md:hidden mb-4">
+          <button
+            onClick={() => setSearchPanelOpen(!searchPanelOpen)}
+            className="w-full flex items-center justify-center gap-2 py-3 bg-emerald-600 text-white rounded-xl font-bold shadow-md"
+          >
+            <span className="material-symbols-outlined text-[20px]">{searchPanelOpen ? 'expand_less' : 'search'}</span>
+            {searchPanelOpen ? 'Hide Search' : 'Search for a Ride'}
+          </button>
+        </div>
+
         {/* Sidebar: Search Controls */}
-        <aside className="w-full md:w-80 shrink-0 space-y-6 mb-8 md:mb-0">
-          <div className="bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant shadow-sm sticky top-24">
-            <h3 className="font-h3 text-xl mb-6 text-on-surface flex items-center gap-2">
+        <aside className={`w-full md:w-80 shrink-0 space-y-6 mb-4 md:mb-0 ${searchPanelOpen ? 'block' : 'hidden'} md:block`}>
+          <div className="bg-surface-container-lowest p-5 md:p-6 rounded-2xl border border-outline-variant shadow-sm md:sticky md:top-24">
+            <h3 className="font-h3 text-xl mb-5 text-on-surface flex items-center gap-2">
               <span className="material-symbols-outlined text-emerald-600">search</span>
               Find a Ride
             </h3>
             
-            <form onSubmit={handleSearch} className="space-y-4">
+            <form onSubmit={(e) => { handleSearch(e); setSearchPanelOpen(false); }} className="space-y-4">
               <div className="space-y-1">
                 <label className="font-label-md text-slate-600">Leaving From</label>
                 <div className="relative">
@@ -162,7 +174,7 @@ const SearchRides = () => {
         </aside>
 
         {/* Main Content Area: Split into List and Map on large screens */}
-        <section className="flex-1 grid grid-cols-1 xl:grid-cols-2 gap-8">
+        <section className="flex-1 grid grid-cols-1 xl:grid-cols-2 gap-6">
           
           {/* List of Rides */}
           <div className="space-y-8">
@@ -268,7 +280,7 @@ const SearchRides = () => {
             )}
           </div>
 
-          {/* Map Display */}
+          {/* Map Display - hidden on mobile */}
           <div className="hidden xl:block h-[calc(100vh-150px)] sticky top-24 bg-slate-100 rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
             {isLoaded ? (
               <GoogleMap

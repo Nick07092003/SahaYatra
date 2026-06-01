@@ -135,7 +135,7 @@ const PostRide = () => {
     <div className="bg-background font-body-md text-on-surface min-h-screen flex flex-col">
       <Navbar />
       
-      <main className="flex-grow max-w-7xl mx-auto px-6 py-12 w-full">
+      <main className="flex-grow max-w-7xl mx-auto px-4 md:px-6 py-8 md:py-12 w-full">
         <div className="mb-8">
           <h2 className="font-h2 text-h2 text-slate-800 mb-2">Offer a Ride</h2>
           <p className="font-body-md text-slate-500">Turn your empty seats into shared experiences and savings.</p>
@@ -144,7 +144,7 @@ const PostRide = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Form Section */}
           <section className="w-full">
-            <div className="bg-white rounded-2xl border border-outline-variant shadow-sm p-8">
+            <div className="bg-white rounded-2xl border border-outline-variant shadow-sm p-5 md:p-8">
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 gap-6">
                   {/* Google Autocomplete for Source */}
@@ -309,8 +309,8 @@ const PostRide = () => {
             </div>
           </section>
 
-          {/* Map Section */}
-          <section className="w-full h-[500px] lg:h-auto rounded-2xl overflow-hidden border border-slate-200 shadow-sm relative bg-slate-100 flex items-center justify-center">
+          {/* Map Section - smaller on mobile */}
+          <section className="w-full h-[300px] md:h-[500px] lg:h-auto rounded-2xl overflow-hidden border border-slate-200 shadow-sm relative bg-slate-100 flex items-center justify-center">
             {isLoaded ? (
               <GoogleMap
                 center={center}

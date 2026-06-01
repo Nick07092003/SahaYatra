@@ -94,11 +94,11 @@ const MyBookings = () => {
     <div className="bg-background font-body-md text-on-surface min-h-screen flex flex-col">
       <Navbar />
       
-      <main className="flex-grow max-w-7xl mx-auto px-6 py-12 w-full">
+      <main className="flex-grow max-w-7xl mx-auto px-4 md:px-6 py-8 md:py-12 w-full">
         <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
           <div>
-            <h1 className="font-h1 text-h2 text-slate-800">My Bookings</h1>
-            <p className="font-body-md text-slate-500 mt-1">Manage your upcoming trips and travel history.</p>
+            <h1 className="font-h1 text-2xl md:text-h2 text-slate-800">My Bookings</h1>
+            <p className="font-body-md text-slate-500 mt-1 text-sm md:text-base">Manage your upcoming trips and travel history.</p>
           </div>
           <div className="bg-purple-100 text-purple-800 px-4 py-2 rounded-full font-bold text-sm uppercase tracking-wider flex items-center gap-2 w-fit">
             <span className="w-2 h-2 rounded-full bg-purple-500"></span>
