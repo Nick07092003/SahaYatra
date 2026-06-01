@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -27,6 +27,18 @@ const itemVariants = {
 const Home = () => {
   const { scrollYProgress } = useScroll();
   const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
+  const navigate = useNavigate();
+
+  const handleProtectedNavigation = (path, e) => {
+    if (e) e.preventDefault();
+    const token = localStorage.getItem('token');
+    if (!token) {
+      alert("Please login first to access this feature.");
+      navigate('/login');
+    } else {
+      navigate(path);
+    }
+  };
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -106,6 +118,7 @@ const Home = () => {
                 <motion.button 
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
+                  onClick={(e) => handleProtectedNavigation('/search-rides', e)}
                   className="bg-primary text-on-primary px-xl py-3 rounded-xl font-label-md hover:bg-emerald-700 transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2"
                 >
                   <span className="material-symbols-outlined text-sm">search</span>
@@ -118,10 +131,13 @@ const Home = () => {
                 className="mt-lg flex flex-wrap gap-4 items-center"
               >
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <Link to="/post-ride" className="flex items-center gap-2 bg-primary-container text-on-primary-container px-lg py-3 rounded-full font-label-md hover:opacity-90 transition-all shadow-sm">
+                  <button 
+                    onClick={(e) => handleProtectedNavigation('/post-ride', e)}
+                    className="flex items-center gap-2 bg-primary-container text-on-primary-container px-lg py-3 rounded-full font-label-md hover:opacity-90 transition-all shadow-sm"
+                  >
                     <span className="material-symbols-outlined text-sm">directions_car</span>
                     Offer a Ride
-                  </Link>
+                  </button>
                 </motion.div>
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                   <a href="#how-it-works" className="flex items-center gap-2 border-2 border-outline text-secondary px-lg py-3 rounded-full font-label-md hover:bg-surface-container-low hover:text-on-surface transition-all">

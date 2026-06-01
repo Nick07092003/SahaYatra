@@ -28,8 +28,10 @@ const Navbar = () => {
   }, [location.pathname]);
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    navigate('/login');
+    if (window.confirm("Are you sure you want to log out?")) {
+      localStorage.removeItem('token');
+      navigate('/login');
+    }
   };
 
   const handleSwitchRole = async () => {
@@ -38,10 +40,11 @@ const Navbar = () => {
     try {
       const response = await switchRole(user.id);
       localStorage.setItem('token', response.data.token);
-      window.location.reload();
+      
+      const newRole = response.data.role;
+      window.location.href = newRole === 'driver' ? '/post-ride' : '/search-rides';
     } catch (err) {
       alert("Failed to switch role");
-    } finally {
       setSwitching(false);
     }
   };
@@ -129,16 +132,6 @@ const Navbar = () => {
 
         {/* Mobile: Right side icons + hamburger */}
         <div className="flex md:hidden items-center gap-2">
-          {user && (
-            <>
-              <Link to="/dashboard" className="p-2 text-slate-600 hover:bg-slate-50 rounded-lg transition-all">
-                <span className="material-symbols-outlined text-[22px]">dashboard</span>
-              </Link>
-              <button onClick={handleLogout} className="p-2 text-slate-600 hover:bg-slate-50 rounded-lg transition-all">
-                <span className="material-symbols-outlined text-[22px]">logout</span>
-              </button>
-            </>
-          )}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="p-2 text-slate-700 hover:bg-slate-100 rounded-lg transition-all"
@@ -154,11 +147,16 @@ const Navbar = () => {
       {/* Mobile Dropdown Menu */}
       {mobileMenuOpen && (
         <div className="md:hidden bg-white border-t border-slate-100 px-4 py-4 space-y-1 shadow-lg">
-          {/* Role Badge */}
+          {/* Role Badge & Dashboard Shortcut */}
           {user && (
-            <p className="text-xs text-slate-400 font-bold uppercase tracking-widest px-4 mb-2">
-              Signed in as {user.role}
-            </p>
+            <div className="flex items-center justify-between px-4 mb-2">
+              <p className="text-xs text-slate-400 font-bold uppercase tracking-widest">
+                Signed in as {user.role}
+              </p>
+              <Link to="/dashboard" onClick={() => setMobileMenuOpen(false)} className="text-emerald-600 text-sm font-bold flex items-center gap-1">
+                <span className="material-symbols-outlined text-[16px]">dashboard</span> Dashboard
+              </Link>
+            </div>
           )}
 
           {/* Passenger Links */}
@@ -204,16 +202,25 @@ const Navbar = () => {
           </Link>
 
           {/* Auth Buttons or Switch Role */}
-          <div className="pt-2 border-t border-slate-100 mt-2">
+          <div className="pt-2 border-t border-slate-100 mt-2 space-y-2">
             {user ? (
-              <button
-                onClick={handleSwitchRole}
-                disabled={switching}
-                className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl transition-all"
-              >
-                <span className="material-symbols-outlined text-[18px]">swap_horiz</span>
-                {switching ? 'Switching...' : `Switch to ${user.role === 'passenger' ? 'Driver' : 'Passenger'}`}
-              </button>
+              <>
+                <button
+                  onClick={handleSwitchRole}
+                  disabled={switching}
+                  className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl transition-all"
+                >
+                  <span className="material-symbols-outlined text-[18px]">swap_horiz</span>
+                  {switching ? 'Switching...' : `Switch to ${user.role === 'passenger' ? 'Driver' : 'Passenger'}`}
+                </button>
+                <button
+                  onClick={handleLogout}
+                  className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-red-50 hover:bg-red-100 text-red-600 font-bold rounded-xl transition-all"
+                >
+                  <span className="material-symbols-outlined text-[18px]">logout</span>
+                  Logout
+                </button>
+              </>
             ) : (
               <div className="flex gap-3">
                 <Link to="/login" className="flex-1 text-center py-3 text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-xl font-bold transition-all">Login</Link>
