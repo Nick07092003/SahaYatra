@@ -4,12 +4,18 @@ import { jwtDecode } from "jwt-decode";
 import { useNavigate, Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import ChatModal from '../components/ChatModal';
 
 const MyBookings = () => {
   const [rides, setRides] = useState([]);
   const [userId, setUserId] = useState(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+
+  // Chat Modal State
+  const [chatOpen, setChatOpen] = useState(false);
+  const [activeChatDriver, setActiveChatDriver] = useState(null);
+  const [activeRideId, setActiveRideId] = useState(null);
 
   // Review Modal State
   const [reviewModal, setReviewModal] = useState({ isOpen: false, ride: null, reviewee: null, roleAtTime: 'passenger' });
@@ -164,6 +170,21 @@ const MyBookings = () => {
                           </div>
                         </div>
                       </div>
+                      <div className="flex gap-2">
+                        {ride.driver && (
+                          <button 
+                            onClick={() => {
+                              setActiveRideId(ride._id);
+                              setActiveChatDriver(ride.driver);
+                              setChatOpen(true);
+                            }}
+                            className="flex items-center gap-1 text-emerald-600 bg-emerald-50 px-3 py-1.5 rounded-md text-xs font-bold hover:bg-emerald-100 transition-colors"
+                          >
+                            <span className="material-symbols-outlined text-[14px]">chat</span>
+                            Chat
+                          </button>
+                        )}
+                      </div>
                     </div>
                     
                     <div className="flex items-center gap-4 mb-4">
@@ -277,6 +298,16 @@ const MyBookings = () => {
       )}
       
       <Footer />
+
+      {chatOpen && activeChatDriver && (
+        <ChatModal 
+          isOpen={chatOpen}
+          onClose={() => setChatOpen(false)}
+          rideId={activeRideId}
+          currentUserId={userId}
+          otherUser={activeChatDriver}
+        />
+      )}
     </div>
   );
 };

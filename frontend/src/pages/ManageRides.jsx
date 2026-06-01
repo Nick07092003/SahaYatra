@@ -4,6 +4,7 @@ import { jwtDecode } from "jwt-decode";
 import { useNavigate, Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import ChatModal from '../components/ChatModal';
 
 const ManageRides = () => {
   const [rides, setRides] = useState([]);
@@ -12,7 +13,12 @@ const ManageRides = () => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [currentEdit, setCurrentEdit] = useState(null);
   const [updating, setUpdating] = useState(false);
-  
+
+  // Chat Modal State
+  const [chatOpen, setChatOpen] = useState(false);
+  const [activeChatUser, setActiveChatUser] = useState(null);
+  const [activeRideId, setActiveRideId] = useState(null);
+
   // Review Modal State
   const [reviewModal, setReviewModal] = useState({ isOpen: false, ride: null, reviewee: null, roleAtTime: 'driver' });
   const [reviewForm, setReviewForm] = useState({ rating: 5, comment: '' });
@@ -239,6 +245,17 @@ const ManageRides = () => {
                               <span className="font-bold text-slate-700 text-sm">{passenger.name}</span>
                             </div>
                             <div className="flex gap-2">
+                              <button 
+                                onClick={() => {
+                                  setActiveRideId(ride._id);
+                                  setActiveChatUser(passenger);
+                                  setChatOpen(true);
+                                }}
+                                className="flex items-center gap-1 text-emerald-600 bg-emerald-50 px-3 py-1.5 rounded-md text-xs font-bold hover:bg-emerald-100 transition-colors"
+                              >
+                                <span className="material-symbols-outlined text-[14px]">chat</span>
+                                Chat
+                              </button>
                               <a href={`tel:${passenger.phone}`} className="flex items-center gap-1 text-blue-600 bg-blue-50 px-3 py-1.5 rounded-md text-xs font-bold hover:bg-blue-100 transition-colors">
                                 <span className="material-symbols-outlined text-[14px]">call</span>
                                 Call
@@ -454,6 +471,16 @@ const ManageRides = () => {
       )}
 
       <Footer />
+
+      {chatOpen && activeChatUser && (
+        <ChatModal 
+          isOpen={chatOpen}
+          onClose={() => setChatOpen(false)}
+          rideId={activeRideId}
+          currentUserId={userId}
+          otherUser={activeChatUser}
+        />
+      )}
     </div>
   );
 };
