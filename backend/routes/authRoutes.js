@@ -127,7 +127,8 @@ router.post('/google-login', async (req, res) => {
             token: generateToken(user._id, user.role, user.name)
         });
     } catch (error) {
-        res.status(401).json({ message: "Invalid Google Token" });
+        console.error('Google login error:', error.message);
+        res.status(401).json({ message: "Google Login Failed: " + error.message });
     }
 });
 
