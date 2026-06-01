@@ -5,6 +5,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import ChatModal from '../components/ChatModal';
+import { useChatNotifications } from '../hooks/useChatNotifications';
 
 const ManageRides = () => {
   const [rides, setRides] = useState([]);
@@ -23,6 +24,9 @@ const ManageRides = () => {
   const [reviewModal, setReviewModal] = useState({ isOpen: false, ride: null, reviewee: null, roleAtTime: 'driver' });
   const [reviewForm, setReviewForm] = useState({ rating: 5, comment: '' });
   const [submittingReview, setSubmittingReview] = useState(false);
+
+  // Real-time unread badges per passenger
+  const { unreadMap, clearUnread, refreshUnread } = useChatNotifications(userId);
   
   const navigate = useNavigate();
 
@@ -245,17 +249,31 @@ const ManageRides = () => {
                               <span className="font-bold text-slate-700 text-sm">{passenger.name}</span>
                             </div>
                             <div className="flex gap-2">
-                              <button 
-                                onClick={() => {
-                                  setActiveRideId(ride._id);
-                                  setActiveChatUser(passenger);
-                                  setChatOpen(true);
-                                }}
-                                className="flex items-center gap-1 text-emerald-600 bg-emerald-50 px-3 py-1.5 rounded-md text-xs font-bold hover:bg-emerald-100 transition-colors"
-                              >
-                                <span className="material-symbols-outlined text-[14px]">chat</span>
-                                Chat
-                              </button>
+                              {/* Chat button with unread badge */}
+                              {(() => {
+                                const passId = passenger._id || passenger.id;
+                                const unreadKey = `${ride._id}_${passId}`;
+                                const unreadCount = unreadMap[unreadKey] || 0;
+                                return (
+                                  <button 
+                                    onClick={() => {
+                                      setActiveRideId(ride._id);
+                                      setActiveChatUser(passenger);
+                                      setChatOpen(true);
+                                      clearUnread(ride._id, passId);
+                                    }}
+                                    className="relative flex items-center gap-1 text-emerald-600 bg-emerald-50 border border-emerald-100 px-3 py-1.5 rounded-xl text-xs font-bold hover:bg-emerald-100 transition-all"
+                                  >
+                                    <span className="material-symbols-outlined text-[14px]">chat</span>
+                                    Chat
+                                    {unreadCount > 0 && (
+                                      <span className="absolute -top-2 -right-2 w-5 h-5 bg-red-500 text-white text-[10px] font-extrabold rounded-full flex items-center justify-center shadow-sm animate-bounce">
+                                        {unreadCount > 9 ? '9+' : unreadCount}
+                                      </span>
+                                    )}
+                                  </button>
+                                );
+                              })()}
                               <a href={`tel:${passenger.phone}`} className="flex items-center gap-1 text-blue-600 bg-blue-50 px-3 py-1.5 rounded-md text-xs font-bold hover:bg-blue-100 transition-colors">
                                 <span className="material-symbols-outlined text-[14px]">call</span>
                                 Call
@@ -475,7 +493,7 @@ const ManageRides = () => {
       {chatOpen && activeChatUser && (
         <ChatModal 
           isOpen={chatOpen}
-          onClose={() => setChatOpen(false)}
+          onClose={() => { setChatOpen(false); refreshUnread(); }}
           rideId={activeRideId}
           currentUserId={userId}
           otherUser={activeChatUser}

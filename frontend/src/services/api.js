@@ -22,3 +22,14 @@ export const deleteRide = (rideId) => API.delete(`/rides/delete/${rideId}`);
 export const switchRole = (userId) => API.put('/auth/switch-role/' + userId);
 export const createReview = (reviewData) => API.post('/reviews/create', reviewData);
 export const getUserReviews = (userId) => API.get(`/reviews/user/${userId}`);
+
+// Chat API
+export const getChatHistory = (rideId, otherUserId, token) =>
+  API.get(`/chat/${rideId}/${otherUserId}`, { headers: { Authorization: `Bearer ${token}` } });
+
+export const markChatRead = (rideId, senderId, token) =>
+  API.put(`/chat/read/${rideId}/${senderId}`, {}, { headers: { Authorization: `Bearer ${token}` } });
+
+export const getUnreadCounts = (userId, token) =>
+  API.get(`/chat/unread/${userId}`, { headers: { Authorization: `Bearer ${token}` } });
+

@@ -71,6 +71,14 @@ const io = new Server(server, {
 io.on('connection', (socket) => {
     console.log('A user connected:', socket.id);
 
+    // Each user joins their own personal notification room (for badge updates)
+    socket.on('join_user_room', ({ userId }) => {
+        if (userId) {
+            socket.join(`user_${userId}`);
+            console.log(`User ${userId} joined their notification room`);
+        }
+    });
+
     // Join a unique room for a ride's private chat between two users
     socket.on('join_room', ({ rideId, userId1, userId2 }) => {
         // Create a consistent room name regardless of who joins first
@@ -94,10 +102,18 @@ io.on('connection', (socket) => {
             });
             await newMessage.save();
 
-            // Emit to the room
+            // Emit to the shared chat room (both sender & receiver see it)
             const users = [senderId, receiverId].sort();
             const room = `${rideId}_${users[0]}_${users[1]}`;
             io.to(room).emit('receive_message', newMessage);
+
+            // Also notify the receiver's personal room for badge updates
+            // (fires even if receiver's chat modal is closed)
+            io.to(`user_${receiverId}`).emit('new_message_notification', {
+                rideId,
+                senderId,
+                messageId: newMessage._id
+            });
             
         } catch (error) {
             console.error('Error saving message:', error);

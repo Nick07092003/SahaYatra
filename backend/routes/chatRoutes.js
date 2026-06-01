@@ -47,4 +47,41 @@ router.put('/read/:rideId/:senderId', authMiddleware, async (req, res) => {
     }
 });
 
+// @route   GET /api/chat/unread/:userId
+// @desc    Get unread message counts grouped by rideId+senderId for a user
+// @access  Private
+router.get('/unread/:userId', authMiddleware, async (req, res) => {
+    try {
+        const userId = req.user.id;
+
+        // Aggregate unread messages grouped by rideId and sender
+        const unreadGroups = await Message.aggregate([
+            {
+                $match: {
+                    receiver: require('mongoose').Types.ObjectId.createFromHexString(userId),
+                    read: false
+                }
+            },
+            {
+                $group: {
+                    _id: { rideId: '$rideId', sender: '$sender' },
+                    count: { $sum: 1 }
+                }
+            }
+        ]);
+
+        // Transform to a map: { "rideId_senderId": count }
+        const unreadMap = {};
+        unreadGroups.forEach(({ _id, count }) => {
+            const key = `${_id.rideId}_${_id.sender}`;
+            unreadMap[key] = count;
+        });
+
+        res.json(unreadMap);
+    } catch (err) {
+        console.error('Unread count error:', err.message);
+        res.status(500).send('Server Error');
+    }
+});
+
 module.exports = router;

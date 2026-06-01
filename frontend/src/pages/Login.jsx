@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { loginUser, googleLogin } from '../services/api';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { GoogleLogin } from '@react-oauth/google';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -13,6 +13,10 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
+  const location = useLocation();
+  // Where to redirect after login (set by Home.jsx when guarding navigation)
+  const from = location.state?.from || '/dashboard';
+  const infoMessage = location.state?.message || null;
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -24,7 +28,7 @@ const Login = () => {
     try {
       const response = await loginUser(formData);
       localStorage.setItem('token', response.data.token);
-      navigate('/dashboard'); 
+      navigate(from, { replace: true });
     } catch (error) {
       alert('Error: ' + (error.response?.data?.message || 'Login Failed'));
     } finally {
@@ -83,6 +87,14 @@ const Login = () => {
               <h2 className="font-h2 text-h3 text-slate-800 mb-xs">Welcome Back</h2>
               <p className="text-slate-500 font-body-md">Sign in to continue your journey.</p>
             </div>
+
+            {/* Info banner when redirected from a protected page */}
+            {infoMessage && (
+              <div className="mb-4 flex items-center gap-2 px-4 py-3 bg-blue-50 border border-blue-100 rounded-xl text-blue-700 text-sm font-semibold">
+                <span className="material-symbols-outlined text-[18px]">info</span>
+                {infoMessage}
+              </div>
+            )}
             
             {/* Form Toggle */}
             <div className="flex p-1 bg-slate-100 rounded-lg mb-lg max-w-xs">
@@ -154,7 +166,7 @@ const Login = () => {
                   try {
                     const res = await googleLogin(credentialResponse.credential);
                     localStorage.setItem('token', res.data.token);
-                    navigate('/dashboard');
+                    navigate(from, { replace: true });
                   } catch (error) {
                     alert('Google Login Failed: ' + (error.response?.data?.message || 'Unknown error'));
                   }

@@ -33,8 +33,8 @@ const Home = () => {
     if (e) e.preventDefault();
     const token = localStorage.getItem('token');
     if (!token) {
-      alert("Please login first to access this feature.");
-      navigate('/login');
+      // Redirect to login; pass intended destination so Login can redirect back
+      navigate('/login', { state: { from: path, message: 'Please log in to continue.' } });
     } else {
       navigate(path);
     }

@@ -5,6 +5,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import ChatModal from '../components/ChatModal';
+import { useChatNotifications } from '../hooks/useChatNotifications';
 
 const MyBookings = () => {
   const [rides, setRides] = useState([]);
@@ -21,6 +22,9 @@ const MyBookings = () => {
   const [reviewModal, setReviewModal] = useState({ isOpen: false, ride: null, reviewee: null, roleAtTime: 'passenger' });
   const [reviewForm, setReviewForm] = useState({ rating: 5, comment: '' });
   const [submittingReview, setSubmittingReview] = useState(false);
+
+  // Real-time unread badges
+  const { unreadMap, clearUnread, refreshUnread } = useChatNotifications(userId);
 
   const fetchBookings = async () => {
     try {
@@ -46,25 +50,35 @@ const MyBookings = () => {
 
   const isRideActive = (dateStr, timeStr) => {
     if (!dateStr || !timeStr) return false;
-    
     const today = new Date();
     const todayDateStr = today.toISOString().split('T')[0];
-    
     if (dateStr < todayDateStr) return false;
     if (dateStr > todayDateStr) return true;
-    
-    // Same day, check time
     const [hours, minutes] = timeStr.split(':').map(Number);
-    if (hours < today.getHours() || (hours === today.getHours() && minutes < today.getMinutes())) {
-      return false;
-    }
+    if (hours < today.getHours() || (hours === today.getHours() && minutes < today.getMinutes())) return false;
     return true;
+  };
+
+  // Check if a passenger's request is ACCEPTED (i.e. they're in ride.passengers)
+  const isAccepted = (ride) => {
+    if (!userId || !ride.passengers) return false;
+    return ride.passengers.some(
+      p => p === userId || p._id === userId || p.toString?.() === userId
+    );
+  };
+
+  const handleOpenChat = (ride) => {
+    setActiveRideId(ride._id);
+    setActiveChatDriver(ride.driver);
+    setChatOpen(true);
+    // Clear the badge for this conversation
+    const driverId = ride.driver?._id || ride.driver?.id;
+    if (driverId) clearUnread(ride._id, driverId);
   };
 
   const handleCancel = async (rideId) => {
     const confirmCancel = window.confirm("Are you sure you want to cancel this ride booking?");
     if (!confirmCancel) return;
-
     try {
       await cancelBooking(rideId, userId);
       alert("Booking cancelled successfully! 🛑");
@@ -129,17 +143,25 @@ const MyBookings = () => {
         ) : (
           <div className="grid grid-cols-1 gap-6 max-w-4xl">
             {rides.map((ride) => {
-              const active = isRideActive(ride.date, ride.time);
-              
+              const accepted = isAccepted(ride);
+              const myRequest = ride.requests?.find(
+                r => r.passenger === userId || r.passenger?._id === userId
+              );
+              const requestStatus = myRequest?.status || 'pending';
+              const driverId = ride.driver?._id || ride.driver?.id;
+              const unreadKey = `${ride._id}_${driverId}`;
+              const unreadCount = unreadMap[unreadKey] || 0;
+
               return (
                 <div key={ride._id} className="bg-white border border-slate-200 rounded-2xl p-6 hover:shadow-lg transition-shadow relative overflow-hidden group flex flex-col md:flex-row gap-6">
+                  {/* Status Badge */}
                   <div className="absolute top-0 right-0 p-4">
-                    {ride.passengers?.includes(userId) || ride.passengers?.some(p => p._id === userId) ? (
+                    {accepted ? (
                       <span className="bg-emerald-50 text-emerald-700 text-[10px] px-3 py-1 rounded-full font-bold tracking-wider uppercase flex items-center gap-1">
                         <span className="material-symbols-outlined text-[12px]">check_circle</span>
                         Confirmed
                       </span>
-                    ) : ride.requests?.find(r => r.passenger === userId || r.passenger?._id === userId)?.status === 'pending' ? (
+                    ) : requestStatus === 'pending' ? (
                       <span className="bg-orange-50 text-orange-700 text-[10px] px-3 py-1 rounded-full font-bold tracking-wider uppercase flex items-center gap-1">
                         <span className="material-symbols-outlined text-[12px]">pending</span>
                         Pending Approval
@@ -170,21 +192,31 @@ const MyBookings = () => {
                           </div>
                         </div>
                       </div>
-                      <div className="flex gap-2">
-                        {ride.driver && (
-                          <button 
-                            onClick={() => {
-                              setActiveRideId(ride._id);
-                              setActiveChatDriver(ride.driver);
-                              setChatOpen(true);
-                            }}
-                            className="flex items-center gap-1 text-emerald-600 bg-emerald-50 px-3 py-1.5 rounded-md text-xs font-bold hover:bg-emerald-100 transition-colors"
-                          >
-                            <span className="material-symbols-outlined text-[14px]">chat</span>
-                            Chat
-                          </button>
-                        )}
-                      </div>
+
+                      {/* ✅ Chat button — ONLY shown when request is ACCEPTED */}
+                      {accepted && ride.driver && (
+                        <button 
+                          onClick={() => handleOpenChat(ride)}
+                          className="relative flex items-center gap-1.5 text-emerald-600 bg-emerald-50 border border-emerald-100 px-3 py-1.5 rounded-xl text-xs font-bold hover:bg-emerald-100 transition-all"
+                        >
+                          <span className="material-symbols-outlined text-[16px]">chat</span>
+                          Chat
+                          {/* Unread badge */}
+                          {unreadCount > 0 && (
+                            <span className="absolute -top-2 -right-2 w-5 h-5 bg-red-500 text-white text-[10px] font-extrabold rounded-full flex items-center justify-center shadow-sm animate-bounce">
+                              {unreadCount > 9 ? '9+' : unreadCount}
+                            </span>
+                          )}
+                        </button>
+                      )}
+
+                      {/* Pending hint */}
+                      {!accepted && requestStatus === 'pending' && (
+                        <div className="flex items-center gap-1.5 text-orange-500 bg-orange-50 border border-orange-100 px-3 py-1.5 rounded-xl text-xs font-bold">
+                          <span className="material-symbols-outlined text-[14px]">schedule</span>
+                          Awaiting driver
+                        </div>
+                      )}
                     </div>
                     
                     <div className="flex items-center gap-4 mb-4">
@@ -259,18 +291,8 @@ const MyBookings = () => {
               
               <div className="flex justify-center gap-2">
                 {[1, 2, 3, 4, 5].map((star) => (
-                  <button
-                    key={star}
-                    type="button"
-                    onClick={() => setReviewForm({...reviewForm, rating: star})}
-                    className="focus:outline-none"
-                  >
-                    <span 
-                      className={`material-symbols-outlined text-4xl transition-colors ${star <= reviewForm.rating ? 'text-yellow-400' : 'text-slate-200'}`} 
-                      style={{ fontVariationSettings: star <= reviewForm.rating ? "'FILL' 1" : "'FILL' 0" }}
-                    >
-                      star
-                    </span>
+                  <button key={star} type="button" onClick={() => setReviewForm({...reviewForm, rating: star})} className="focus:outline-none">
+                    <span className={`material-symbols-outlined text-4xl transition-colors ${star <= reviewForm.rating ? 'text-yellow-400' : 'text-slate-200'}`} style={{ fontVariationSettings: star <= reviewForm.rating ? "'FILL' 1" : "'FILL' 0" }}>star</span>
                   </button>
                 ))}
               </div>
@@ -285,11 +307,7 @@ const MyBookings = () => {
                 />
               </div>
 
-              <button 
-                type="submit" 
-                disabled={submittingReview}
-                className="w-full py-3 bg-yellow-500 text-white rounded-xl font-bold hover:bg-yellow-600 transition-all shadow-md shadow-yellow-500/20 disabled:opacity-70 flex justify-center items-center gap-2"
-              >
+              <button type="submit" disabled={submittingReview} className="w-full py-3 bg-yellow-500 text-white rounded-xl font-bold hover:bg-yellow-600 transition-all shadow-md shadow-yellow-500/20 disabled:opacity-70 flex justify-center items-center gap-2">
                 {submittingReview ? 'Submitting...' : 'Submit Review'}
               </button>
             </form>
@@ -299,10 +317,11 @@ const MyBookings = () => {
       
       <Footer />
 
+      {/* Chat Modal */}
       {chatOpen && activeChatDriver && (
         <ChatModal 
           isOpen={chatOpen}
-          onClose={() => setChatOpen(false)}
+          onClose={() => { setChatOpen(false); refreshUnread(); }}
           rideId={activeRideId}
           currentUserId={userId}
           otherUser={activeChatDriver}
