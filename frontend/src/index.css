@@ -9,6 +9,12 @@
   font-display: block;
 }
 
+/* ── Shimmer animation for skeleton loaders ─────────────────────────────── */
+@keyframes shimmer {
+  100% { transform: translateX(200%); }
+}
+
+
 /* ── Glassmorphism blur utility ─────────────────────────────────────────── */
 .backdrop-blur-md {
   backdrop-filter: blur(12px);

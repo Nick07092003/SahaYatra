@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { jwtDecode } from "jwt-decode";
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import { SkeletonDashboard } from '../components/Skeletons';
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -64,8 +65,12 @@ const Dashboard = () => {
   };
 
   if (!user) return (
-    <div className="flex justify-center items-center min-h-screen bg-background">
-      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600"></div>
+    <div className="flex flex-col min-h-screen bg-background">
+      <Navbar />
+      <main className="flex-grow max-w-7xl mx-auto px-6 py-12 w-full">
+        <SkeletonDashboard />
+      </main>
+      <Footer />
     </div>
   );
 

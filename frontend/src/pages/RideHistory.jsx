@@ -4,6 +4,7 @@ import { jwtDecode } from "jwt-decode";
 import { useNavigate, Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import { SkeletonHistoryCard } from '../components/Skeletons';
 
 const RideHistory = () => {
   const [offeredRides, setOfferedRides] = useState([]);
@@ -114,8 +115,8 @@ const RideHistory = () => {
         </div>
 
         {loading ? (
-          <div className="flex justify-center items-center py-20">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600"></div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {[...Array(4)].map((_, i) => <SkeletonHistoryCard key={i} />)}
           </div>
         ) : (activeTab === 'booked' ? bookedRides : offeredRides).length === 0 ? (
           <div className="text-center py-20 bg-white rounded-2xl border border-slate-200 border-dashed">

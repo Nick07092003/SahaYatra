@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { useJsApiLoader, GoogleMap, Autocomplete, Marker } from '@react-google-maps/api';
+import { SkeletonSearchCard } from '../components/Skeletons';
 
 const libraries = ['places'];
 const mapContainerStyle = { width: '100%', height: '100%', borderRadius: '1rem' };
@@ -189,7 +190,12 @@ const SearchRides = () => {
               </div>
             </header>
 
-            {hasSearched && rides.length === 0 ? (
+            {loading ? (
+              /* Skeleton cards while searching */
+              <div className="flex flex-col gap-6">
+                {[...Array(3)].map((_, i) => <SkeletonSearchCard key={i} />)}
+              </div>
+            ) : hasSearched && rides.length === 0 ? (
                <div className="text-center py-20 bg-slate-50 rounded-2xl border border-slate-200 border-dashed">
                  <span className="material-symbols-outlined text-6xl text-slate-300 mb-4">directions_car_off</span>
                  <h3 className="font-h3 text-xl text-slate-600 mb-2">No rides found</h3>
@@ -313,8 +319,8 @@ const SearchRides = () => {
                 })}
               </GoogleMap>
             ) : (
-              <div className="flex items-center justify-center h-full">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600"></div>
+              <div className="w-full h-full bg-slate-100 animate-pulse rounded-2xl flex items-center justify-center">
+                <span className="material-symbols-outlined text-5xl text-slate-300">map</span>
               </div>
             )}
           </div>

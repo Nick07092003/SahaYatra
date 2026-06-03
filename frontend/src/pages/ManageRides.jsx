@@ -6,6 +6,7 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import ChatModal from '../components/ChatModal';
 import { useChatNotifications } from '../hooks/useChatNotifications';
+import { SkeletonDriverCard } from '../components/Skeletons';
 
 const ManageRides = () => {
   const [rides, setRides] = useState([]);
@@ -172,8 +173,8 @@ const ManageRides = () => {
         </div>
 
         {loading ? (
-          <div className="flex justify-center items-center py-20">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600"></div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
+            {[...Array(4)].map((_, i) => <SkeletonDriverCard key={i} />)}
           </div>
         ) : rides.length === 0 ? (
           <div className="text-center py-20 bg-white rounded-2xl border border-slate-200 border-dashed">
