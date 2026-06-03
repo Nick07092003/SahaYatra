@@ -33,3 +33,16 @@ export const markChatRead = (rideId, senderId, token) =>
 export const getUnreadCounts = (userId, token) =>
   API.get(`/chat/unread/${userId}`, { headers: { Authorization: `Bearer ${token}` } });
 
+// Driver Profile API
+export const updateDriverDetails = (userId, data) =>
+  API.put(`/auth/driver-details/${userId}`, data);
+
+export const updateVehicleDetails = (userId, data) =>
+  API.put(`/auth/vehicle-details/${userId}`, data);
+
+export const submitVerification = (userId, formData) =>
+  API.put(`/auth/verification/${userId}`, formData, {
+    headers: { 'Content-Type': 'multipart/form-data' }
+  });
+
+

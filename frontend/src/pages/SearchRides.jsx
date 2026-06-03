@@ -215,7 +215,12 @@ const SearchRides = () => {
                           </div>
                         )}
                         <div>
-                          <h4 className="font-h3 text-lg text-slate-800">{ride.driver?.name || "Unknown Driver"}</h4>
+                          <h4 className="font-h3 text-lg text-slate-800 flex items-center gap-2">
+                            {ride.driver?.name || "Unknown Driver"}
+                            {ride.driver?.verification?.isVerified && (
+                              <span title="Verified Driver" className="material-symbols-outlined text-[18px] text-emerald-600" style={{ fontVariationSettings: "'FILL' 1" }}>verified</span>
+                            )}
+                          </h4>
                           <div className="flex items-center gap-1 text-yellow-500">
                             <span className="material-symbols-outlined text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
                             <span className="font-label-md text-slate-700">{ride.driver?.averageRating > 0 ? ride.driver.averageRating : 'New'}</span>
@@ -223,6 +228,15 @@ const SearchRides = () => {
                               <span className="text-xs text-slate-500 font-normal">({ride.driver.totalReviews} reviews)</span>
                             )}
                           </div>
+                          {/* Vehicle info */}
+                          {(ride.driver?.vehicleDetails?.model || ride.driver?.vehicleDetails?.color) && (
+                            <div className="flex items-center gap-1.5 mt-1">
+                              <span className="material-symbols-outlined text-[14px] text-slate-400">directions_car</span>
+                              <span className="text-xs text-slate-500 font-semibold">
+                                {[ride.driver.vehicleDetails.model, ride.driver.vehicleDetails.color].filter(Boolean).join(' · ')}
+                              </span>
+                            </div>
+                          )}
                         </div>
                       </div>
                       <div className="text-right">

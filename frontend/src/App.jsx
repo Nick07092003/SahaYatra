@@ -15,6 +15,7 @@ const ManageRides = lazy(() => import('./pages/ManageRides'));
 const MyBookings  = lazy(() => import('./pages/MyBookings'));
 const RideHistory = lazy(() => import('./pages/RideHistory'));
 const Support     = lazy(() => import('./pages/Support'));
+const DriverProfile = lazy(() => import('./pages/DriverProfile'));
 
 // ── Page loading skeleton ─────────────────────────────────────────────────
 // Shown while a lazy chunk is being downloaded.
@@ -40,8 +41,9 @@ function App() {
         <Route path="/search-rides" element={<SearchRides />} />
         <Route path="/manage-rides" element={<ManageRides />} />
         <Route path="/my-bookings"  element={<MyBookings />} />
-        <Route path="/history"      element={<RideHistory />} />
-        <Route path="/support"      element={<Support />} />
+        <Route path="/history"        element={<RideHistory />} />
+        <Route path="/support"        element={<Support />} />
+        <Route path="/driver-profile" element={<DriverProfile />} />
       </Routes>
     </Suspense>
   );

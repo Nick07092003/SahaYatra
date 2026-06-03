@@ -83,6 +83,18 @@ const Dashboard = () => {
 
   const profileImageUrl = getProfileImageUrl();
 
+  // ── Driver profile completion score ─────────────────────────────────────
+  const driverCompletion = (() => {
+    if (user.role !== 'driver') return null;
+    let filled = 0, total = 3;
+    const dd = user.driverDetails;
+    const vd = user.vehicleDetails;
+    const vf = user.verification;
+    if (dd?.bio || dd?.experienceYears || dd?.languages?.length) filled++;
+    if (vd?.make && vd?.model) filled++;
+    if (vf?.licenseNumber && vf?.aadharNumber) filled++;
+    return { filled, total, pct: Math.round((filled / total) * 100) };
+  })();
   return (
     <div className="bg-background font-body-md text-on-background min-h-screen flex flex-col">
       <Navbar />
@@ -101,9 +113,12 @@ const Dashboard = () => {
                   {user.name?.charAt(0).toUpperCase()}
                 </div>
               )}
-              <div className="absolute bottom-1 right-1 bg-emerald-600 text-white rounded-full p-1.5 border-2 border-white flex items-center justify-center shadow-sm">
-                <span className="material-symbols-outlined text-[16px]" style={{ fontVariationSettings: "'FILL' 1" }}>verified</span>
-              </div>
+              {/* Verified badge — only shows if driver is verified */}
+              {user?.verification?.isVerified && (
+                <div className="absolute bottom-1 right-1 bg-emerald-600 text-white rounded-full p-1.5 border-2 border-white flex items-center justify-center shadow-sm">
+                  <span className="material-symbols-outlined text-[16px]" style={{ fontVariationSettings: "'FILL' 1" }}>verified</span>
+                </div>
+              )}
             </div>
             
             <div className="flex-1 text-center md:text-left space-y-2 z-10">
@@ -116,13 +131,18 @@ const Dashboard = () => {
                   {user.averageRating > 0 ? `${user.averageRating} • ${user.totalReviews} Reviews` : 'New User'} • Verified
                 </span>
               </div>
-              <div className="flex flex-wrap justify-center md:justify-start gap-3 pt-3">
+            <div className="flex flex-wrap justify-center md:justify-start gap-3 pt-3">
                 <span className="bg-emerald-100 text-emerald-800 px-4 py-1.5 rounded-full font-bold text-xs uppercase tracking-wider flex items-center gap-1 border border-emerald-200">
                   <span className="material-symbols-outlined text-[14px]">eco</span> Active User
                 </span>
                 <span className="bg-slate-100 text-slate-600 px-4 py-1.5 rounded-full font-bold text-xs uppercase tracking-wider border border-slate-200">
                   Joined {new Date(user.createdAt || Date.now()).getFullYear()}
                 </span>
+                {user.verification?.isVerified && (
+                  <span className="bg-blue-100 text-blue-700 px-4 py-1.5 rounded-full font-bold text-xs uppercase tracking-wider flex items-center gap-1 border border-blue-200">
+                    <span className="material-symbols-outlined text-[14px]">verified</span> Verified Driver
+                  </span>
+                )}
               </div>
             </div>
             
@@ -152,6 +172,63 @@ const Dashboard = () => {
                 </div>
               </dl>
             </div>
+
+            {/* ── Driver Profile Completion Card (drivers only) ── */}
+            {driverCompletion && (
+              <div className={`rounded-2xl border p-6 shadow-sm ${
+                driverCompletion.pct === 100
+                  ? 'bg-emerald-50 border-emerald-200'
+                  : 'bg-orange-50 border-orange-200'
+              }`}>
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="font-bold text-slate-800 flex items-center gap-2">
+                    <span className="material-symbols-outlined text-[18px] text-slate-500">assignment_ind</span>
+                    Driver Profile
+                  </h3>
+                  <span className={`text-sm font-extrabold ${
+                    driverCompletion.pct === 100 ? 'text-emerald-600' : 'text-orange-600'
+                  }`}>{driverCompletion.filled}/{driverCompletion.total}</span>
+                </div>
+
+                {/* Progress bar */}
+                <div className="h-2 bg-slate-200 rounded-full overflow-hidden mb-3">
+                  <div
+                    className={`h-full rounded-full transition-all duration-700 ${
+                      driverCompletion.pct === 100 ? 'bg-emerald-500' : 'bg-orange-400'
+                    }`}
+                    style={{ width: `${driverCompletion.pct}%` }}
+                  />
+                </div>
+
+                <div className="space-y-1.5 mb-4">
+                  {[
+                    { label: 'Driver Details', done: !!(user.driverDetails?.bio || user.driverDetails?.experienceYears || user.driverDetails?.languages?.length) },
+                    { label: 'Vehicle Details', done: !!(user.vehicleDetails?.make && user.vehicleDetails?.model) },
+                    { label: 'Verification Docs', done: !!(user.verification?.licenseNumber && user.verification?.aadharNumber) },
+                  ].map(({ label, done }) => (
+                    <div key={label} className="flex items-center gap-2 text-sm">
+                      <span className={`material-symbols-outlined text-[16px] ${ done ? 'text-emerald-600' : 'text-slate-300' }`}
+                        style={{ fontVariationSettings: done ? "'FILL' 1" : "'FILL' 0" }}>check_circle</span>
+                      <span className={done ? 'text-slate-700 font-semibold' : 'text-slate-400'}>{label}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <Link
+                  to="/driver-profile"
+                  className={`flex items-center justify-center gap-2 w-full py-2.5 rounded-xl font-bold text-sm transition-all ${
+                    driverCompletion.pct === 100
+                      ? 'bg-emerald-600 text-white hover:bg-emerald-700'
+                      : 'bg-orange-500 text-white hover:bg-orange-600'
+                  }`}
+                >
+                  <span className="material-symbols-outlined text-[16px]">
+                    {driverCompletion.pct === 100 ? 'edit' : 'arrow_forward'}
+                  </span>
+                  {driverCompletion.pct === 100 ? 'Edit Profile' : 'Complete Profile'}
+                </Link>
+              </div>
+            )}
           </aside>
 
           {/* Action Panels */}

@@ -183,4 +183,108 @@ router.put('/switch-role/:id', async (req, res) => {
     }
 });
 
-module.exports = router;
+// @route   PUT /api/auth/driver-details/:id
+// @desc    Update driver bio, experience years, and languages
+router.put('/driver-details/:id', async (req, res) => {
+    try {
+        const { bio, experienceYears, languages } = req.body;
+        const user = await User.findById(req.params.id);
+        if (!user) return res.status(404).json({ message: 'User not found' });
+
+        user.driverDetails = {
+            ...user.driverDetails,
+            bio: bio ?? user.driverDetails?.bio ?? '',
+            experienceYears: experienceYears ?? user.driverDetails?.experienceYears ?? 0,
+            languages: languages ?? user.driverDetails?.languages ?? [],
+            totalRides: user.driverDetails?.totalRides ?? 0
+        };
+
+        await user.save();
+        res.json({ message: 'Driver details updated', driverDetails: user.driverDetails });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+// @route   PUT /api/auth/vehicle-details/:id
+// @desc    Update vehicle make, model, year, color, plate, type
+router.put('/vehicle-details/:id', async (req, res) => {
+    try {
+        const { make, model, year, color, plateNumber, type } = req.body;
+        const user = await User.findById(req.params.id);
+        if (!user) return res.status(404).json({ message: 'User not found' });
+
+        user.vehicleDetails = {
+            make: make ?? user.vehicleDetails?.make ?? '',
+            model: model ?? user.vehicleDetails?.model ?? '',
+            year: year ?? user.vehicleDetails?.year ?? null,
+            color: color ?? user.vehicleDetails?.color ?? '',
+            plateNumber: plateNumber ?? user.vehicleDetails?.plateNumber ?? '',
+            type: type ?? user.vehicleDetails?.type ?? 'sedan'
+        };
+
+        await user.save();
+        res.json({ message: 'Vehicle details updated', vehicleDetails: user.vehicleDetails });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+// @route   PUT /api/auth/verification/:id
+// @desc    Submit verification documents (license + Aadhar)
+// @access  Private (user must be logged in)
+router.put('/verification/:id',
+    upload.fields([
+        { name: 'licenseDocument', maxCount: 1 },
+        { name: 'aadharDocument', maxCount: 1 }
+    ]),
+    async (req, res) => {
+        try {
+            const { licenseNumber, aadharNumber } = req.body;
+            const user = await User.findById(req.params.id);
+            if (!user) return res.status(404).json({ message: 'User not found' });
+
+            // Only update fields that were provided
+            const updatedVerification = { ...user.verification?.toObject?.() ?? {} };
+
+            if (licenseNumber) updatedVerification.licenseNumber = licenseNumber;
+            if (aadharNumber) updatedVerification.aadharNumber = aadharNumber;
+
+            if (req.files?.licenseDocument?.[0]) {
+                updatedVerification.licenseDocument = `/uploads/${req.files.licenseDocument[0].filename}`;
+            }
+            if (req.files?.aadharDocument?.[0]) {
+                updatedVerification.aadharDocument = `/uploads/${req.files.aadharDocument[0].filename}`;
+            }
+
+            // Mark as submitted if both numbers are present
+            const hasLicense = updatedVerification.licenseNumber;
+            const hasAadhar = updatedVerification.aadharNumber;
+            if (hasLicense && hasAadhar) {
+                updatedVerification.submittedAt = new Date();
+            }
+
+            // isVerified stays false — admin must approve manually
+            updatedVerification.isVerified = user.verification?.isVerified ?? false;
+
+            user.verification = updatedVerification;
+            await user.save();
+
+            res.json({
+                message: 'Verification details submitted successfully',
+                verification: {
+                    isVerified: user.verification.isVerified,
+                    licenseNumber: user.verification.licenseNumber,
+                    aadharNumber: user.verification.aadharNumber,
+                    submittedAt: user.verification.submittedAt,
+                    hasLicenseDoc: !!user.verification.licenseDocument,
+                    hasAadharDoc: !!user.verification.aadharDocument
+                }
+            });
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    }
+);
+
+module.exports = router;
