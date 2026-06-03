@@ -202,7 +202,7 @@ const SearchRides = () => {
                     <div className="flex justify-between items-start mb-6">
                       <div className="flex gap-4 items-center">
                         {ride.driver?.profilePicture ? (
-                           <img src={ride.driver.profilePicture.startsWith('http') ? ride.driver.profilePicture : `http://localhost:5000${ride.driver.profilePicture}`} alt="Driver" className="w-12 h-12 rounded-full object-cover ring-2 ring-emerald-50" />
+                           <img src={ride.driver.profilePicture.startsWith('http') ? ride.driver.profilePicture : `http://localhost:5000${ride.driver.profilePicture}`} alt="Driver" className="w-12 h-12 rounded-full object-cover ring-2 ring-emerald-50" loading="lazy" decoding="async" />
                         ) : (
                           <div className="w-12 h-12 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 font-bold text-lg ring-2 ring-emerald-50">
                             {ride.driver?.name?.charAt(0) || "D"}

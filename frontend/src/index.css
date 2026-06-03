@@ -2,9 +2,48 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ── Icon font variation defaults ──────────────────────────────────────── */
 .material-symbols-outlined {
-    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  /* Prevent invisible icon text during font load */
+  font-display: block;
 }
+
+/* ── Glassmorphism blur utility ─────────────────────────────────────────── */
 .backdrop-blur-md {
-    backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* ── Content-visibility: defer rendering of off-screen sections ────────── */
+/* Skips layout/paint for sections below the fold until they scroll into view.
+   "contain-intrinsic-size" gives the browser an estimated height so the
+   scrollbar doesn't jump when the section renders. */
+.cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 600px; /* estimated height */
+}
+
+/* ── Smooth scroll ──────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* ── Image rendering: crisp downscaling ─────────────────────────────────── */
+img {
+  image-rendering: auto;
+  /* Prevent layout shift: images are block-level */
+  display: block;
+}
+
+/* ── Prevent FOUT for custom fonts ─────────────────────────────────────── */
+@layer base {
+  body {
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 }

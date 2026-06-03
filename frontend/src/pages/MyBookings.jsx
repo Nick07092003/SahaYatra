@@ -178,7 +178,7 @@ const MyBookings = () => {
                     <div className="flex justify-between items-start mb-4 pr-24">
                       <div className="flex items-center gap-4">
                         {ride.driver?.profilePicture ? (
-                           <img src={ride.driver.profilePicture.startsWith('http') ? ride.driver.profilePicture : `http://localhost:5000${ride.driver.profilePicture}`} alt="Driver" className="w-12 h-12 rounded-full object-cover ring-2 ring-emerald-50" />
+                           <img src={ride.driver.profilePicture.startsWith('http') ? ride.driver.profilePicture : `http://localhost:5000${ride.driver.profilePicture}`} alt="Driver" className="w-12 h-12 rounded-full object-cover ring-2 ring-emerald-50" loading="lazy" decoding="async" />
                         ) : (
                           <div className="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 font-bold text-lg ring-2 ring-slate-50">
                             {ride.driver?.name?.charAt(0) || "D"}

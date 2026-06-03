@@ -47,7 +47,7 @@ const Home = () => {
       <main className="flex-grow">
         {/* Hero Section */}
         <section className="relative min-h-[85vh] flex items-center pt-xl pb-xl px-margin overflow-hidden">
-          {/* Parallax Background */}
+          {/* Parallax Background — responsive srcset: 640w mobile, 1280w tablet, 1920w desktop */}
           <div className="absolute inset-0 z-0">
             <motion.div 
               style={{ y: backgroundY }}
@@ -57,8 +57,29 @@ const Home = () => {
                 initial={{ scale: 1.15 }}
                 animate={{ scale: 1 }}
                 transition={{ duration: 3, ease: "easeOut" }}
-                className="w-full h-full bg-[url('https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&q=80')] bg-cover bg-center" 
-              />
+                className="w-full h-full overflow-hidden"
+              >
+                {/* 
+                  Responsive hero image:
+                  - Mobile  (≤640px):  640w  ≈ ~40KB
+                  - Tablet  (≤1280px): 1280w ≈ ~100KB
+                  - Desktop (>1280px): 1920w ≈ ~180KB
+                  fetchpriority="high" = LCP image, load as early as possible
+                */}
+                <img
+                  src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&q=75&w=1280"
+                  srcSet="
+                    https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&q=60&w=640  640w,
+                    https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&q=70&w=1280 1280w,
+                    https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&q=80&w=1920 1920w
+                  "
+                  sizes="100vw"
+                  alt="City street view for hero background"
+                  className="w-full h-full object-cover object-center scale-[1.15] motion-safe:transition-transform"
+                  fetchPriority="high"
+                  decoding="async"
+                />
+              </motion.div>
             </motion.div>
             <div className="absolute inset-0 bg-gradient-to-r from-background via-background/95 to-transparent"></div>
           </div>
@@ -150,8 +171,8 @@ const Home = () => {
           </div>
         </section>
 
-        {/* Bento Grid Features Section */}
-        <section id="how-it-works" className="py-24 px-margin max-w-7xl mx-auto">
+        {/* Bento Grid Features Section — deferred rendering until scrolled into view */}
+        <section id="how-it-works" className="cv-auto py-24 px-margin max-w-7xl mx-auto">
           <motion.div 
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -188,7 +209,20 @@ const Home = () => {
                 </div>
               </div>
               <div className="w-full md:w-5/12 aspect-square rounded-2xl overflow-hidden shadow-inner relative">
-                <img className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" alt="diverse group of happy young professionals" src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80"/>
+                {/* Lazy-loaded responsive image: saves bandwidth on mobile */}
+                <img
+                  src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=75&w=640"
+                  srcSet="
+                    https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=60&w=400  400w,
+                    https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=75&w=640  640w,
+                    https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=900  900w
+                  "
+                  sizes="(max-width: 768px) 100vw, 40vw"
+                  className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+                  alt="Diverse group of happy young professionals"
+                  loading="lazy"
+                  decoding="async"
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
               </div>
             </motion.div>
@@ -262,8 +296,8 @@ const Home = () => {
           </div>
         </section>
 
-        {/* CTA Section */}
-        <section className="py-24 px-margin bg-emerald-50/50 dark:bg-slate-900/40 relative overflow-hidden">
+        {/* CTA Section — deferred rendering until scrolled into view */}
+        <section className="cv-auto py-24 px-margin bg-emerald-50/50 dark:bg-slate-900/40 relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-emerald-200 to-transparent"></div>
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
